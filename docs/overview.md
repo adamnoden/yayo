@@ -14,7 +14,7 @@ YAYO: The Retro-Futuristic Finance Odyssey is a dynamic, community-driven stock 
 ## Features:
 
 - Dynamic Market Simulation: Dive into a realistic stock market environment that mirrors the volatility and opportunities of real-world financial markets, allowing for an immersive investment experience without the risk of actual money.
-- Community-Driven Competitions: Form or join investment groups (Pools/Syndicates), participate in weekly trading competitions, and climb the leaderboards by making savvy investment choices. YAYO’s community-centric approach fosters collaboration, rivalry, and social interaction among players.
+- Community-Driven Competitions: Form or join investment groups (PFunds), participate in weekly trading competitions, and climb the leaderboards by making savvy investment choices. YAYO’s community-centric approach fosters collaboration, rivalry, and social interaction among players.
 - Educational Insights: Learn the ropes of financial investment through gameplay. YAYO demystifies complex financial concepts, making it easier for players of all skill levels to understand market trends, investment strategies, and financial planning.
 - Retro-Futuristic Aesthetic: Immerse yourself in a game world that combines the nostalgic feel of retro finance with futuristic elements, featuring a vibrant neon color palette, pixel-art graphics, and a synthwave soundtrack that transports players back in time.
 - Membership Tiers: Choose from Standard, Executive, or Sovereign memberships, each offering different levels of access to features, tools, and exclusive perks, tailored to enhance your trading experience and strategy.
@@ -27,28 +27,35 @@ YAYO: The Retro-Futuristic Finance Odyssey is a dynamic, community-driven stock 
 
 ## Core Gameplay
 
-- **Pool/Syndicate Formation:** Users can create or join Pools with a maximum of 10 members. Competitions run weekly, from market opening on Monday to market close on Friday, covering NYSE and NASDAQ.
+- **Fund Formation:** Users can create or join Pools with a maximum of 10 members. Competitions run weekly, from market opening on Monday to market close on Friday, covering NYSE and NASDAQ.
 - **Weekly Picks:** Participants "invest" a virtual $100 in a single stock at the week's start. Picks are made after market close on Friday and before it reopens on Monday.
-- **Earning Virtual Currency:** Users start with a base amount of virtual currency. Additional currency is awarded for winning weekly Pool/Syndicate challenges, with a participation bonus to encourage engagement.
+- **AUM:** that $100 increases as the Fund's "level" increases (e.g. rises to $1000 per player after $50,000 earned)
+- **Earning Virtual Currency:** Users start with a base amount of virtual currency. Additional currency is awarded for winning weekly Fund challenges
+- The person with the most gains sweeps all the gains and gets 2x
+- Everyone else gets participation bonus to encourage enagement
+- If everyone goes green everyone gets 2x
+- If everyone goes red all gets 0
+- The earnings are also duplicated into the fund Pot. this can be used by the Fund Manager to spend on things
+- Things might be:
+  - Risk Manager -> gives him the option to stop out a single player a week
+  - Investor Relations -> get more AUM
+  - Fund cosmetics
+- **Funds levels:** unlock more weekly investment and other perks on achievement levels
   - **[Executive Members]** 2x Multiplier on winnings
   - **[Soverign Members]** 20x Multiplier on winnings
 - **Virtual Bank:** Tracks currency from wins, wagers, and participation. Virtual currency can be gifted or **[Executive Members]** private investment or put in a savings account
 - **Market Hours:** Targets US market hours
-- **Cosmetics:** Currency can be used to by group/profile cosmetics.
+- **Cosmetics:** Currency can be used to by profile cosmetics.
 - **Collections:** Can also have 'collections' which is just buying up to 20 different types of cars/house/watch/yatchts/jets/polititians (including local police cheif) to have in a sort of display cabinet which is purely for clout
 
-## Core Gameplay EXTENDED
+## Fund Administration Structure
 
-- **Pool/Syndicate vs. Pool/Syndicate Battles:** Compete for the most gains, with potential multipliers on virtual currency winnings and additional badges.
-- **Pool/Syndicate Achievements**
+- **Roles:** Admins, acting as Fund Manager, start with one Fund admin and can invite, kick Traders (members), and assign additional admins
+- **Invitation Rights:** Admins control new Trader invitations.
+- **Customization:** Admins can edit the Fund's description, name, and badge.
+- **Traders:** Can invest that weeks investment
 
-## Pool/Syndicate Administration Structure
-
-- **Roles:** Admins, acting as Captain/Managing Director, start with one Pool/Syndicate admin and can invite, kick members, and assign additional admins.
-- **Invitation Rights:** Admins control new member invitations.
-- **Customization:** Admins can edit the Pool/Syndicate's description, name, and badge.
-
-## Pool/Syndicate Info
+## Fund Info
 
 - **Profile:** Includes name, info, badges, banners, achievements, current week's picks and performance, member list, leaderboards, battle history, and **[Executive]** analytics on group performance.
 
