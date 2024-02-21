@@ -33,3 +33,10 @@ yarn-error.*
 
 # typescript
 *.tsbuildinfo
+
+
+# iOS specific
+ios/build/
+ios/Pods/
+*.xcworkspace
+*.xcuserstate

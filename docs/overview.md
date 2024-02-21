@@ -7,7 +7,11 @@
 - Yoshimura Asset Yield Observatory
 - Yamamoto Asset Yield Organisation
 
-## Overview
+## Elevator Pitch
+
+A sort of cross between a hedge fund simulator and trading fantasty league with a poolsuite.fm aeasthetic
+
+## Marketing Pitch
 
 YAYO: The Retro-Futuristic Finance Odyssey is a dynamic, community-driven stock market simulation game that merges the thrill of financial investments with the nostalgic charm of retro-futurism. Set against a backdrop that evokes the glitzy vibes of vintage finance, YAYO offers an educational yet entertaining platform where players navigate the ebbs and flows of a simulated stock market, complete with all the excitement of Wall Street’s golden era.
 
