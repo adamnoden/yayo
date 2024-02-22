@@ -1,12 +1,13 @@
 ## Todo next
 
-- find stocks API
-- trial out stocks API directly locally
+- firebase fn for getting stock
+- try this on finhubb api
+- see if this is economically feasible
+- try without npm install of the library
 - wire up to a manual button to fetch for a single stock
 
 ## Todo
 
-- sign up to firebase
 - choose auth type and implement
 - get an expo cloud/tester build?
 
