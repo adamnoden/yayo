@@ -1,13 +1,12 @@
 ## Todo next
 
-- firebase fn for getting stock
-- try this on finhubb api
-- see if this is economically feasible
-- try without npm install of the library
-- wire up to a manual button to fetch for a single stock
+- finhubb api key to env
+- wire up to app locally to a manual button to fetch for a single stock
+- deploy firebase fn
 
 ## Todo
 
+- sort out apple developer stuff
 - choose auth type and implement
 - get an expo cloud/tester build?
 
