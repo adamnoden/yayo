@@ -6,6 +6,8 @@ import { FieldValue } from "firebase-admin/firestore";
 admin.initializeApp();
 const finnhubApiKey = functions.config().finnhub.key;
 
+const ONE_HOUR_MS = 60 * 60 * 1000;
+
 async function fetchStockPriceFromAPI(ticker: string): Promise<number> {
   const finnhubBaseUrl = "https://finnhub.io/api/v1";
   const url = `${finnhubBaseUrl}/quote?symbol=${ticker}&token=${finnhubApiKey}`;
@@ -43,12 +45,13 @@ export const fetchStockPrice = functions.https.onCall(
     const db = admin.firestore();
 
     // Try to get the cached price first
-    let price, source;
+    let price;
+    let source;
     try {
       const cacheResult = await db
         .collection(collectionName)
         .where("ticker", "==", ticker)
-        .where("timestamp", ">=", new Date(Date.now() - 60 * 60 * 1000))
+        .where("timestamp", ">=", new Date(Date.now() - ONE_HOUR_MS))
         .orderBy("timestamp", "desc")
         .limit(1)
         .get();
