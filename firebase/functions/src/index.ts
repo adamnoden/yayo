@@ -4,10 +4,11 @@ import * as https from "https";
 import { FieldValue } from "firebase-admin/firestore";
 
 admin.initializeApp();
+const finnhubApiKey = functions.config().finnhub.key;
 
 async function fetchStockPriceFromAPI(ticker: string): Promise<number> {
-  const apiKey = "cna8k99r01qjv5ip8pc0cna8k99r01qjv5ip8pcg"; // Replace with your actual API key
-  const url = `https://finnhub.io/api/v1/quote?symbol=${ticker}&token=${apiKey}`;
+  const finnhubBaseUrl = "https://finnhub.io/api/v1";
+  const url = `${finnhubBaseUrl}/quote?symbol=${ticker}&token=${finnhubApiKey}`;
 
   return new Promise((resolve, reject) => {
     https

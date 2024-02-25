@@ -44,3 +44,6 @@ ios/build/
 ios/Pods/
 *.xcworkspace
 *.xcuserstate
+
+# firebase
+.runtimeconfig.json
