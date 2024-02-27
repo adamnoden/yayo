@@ -62,11 +62,16 @@ export const fetchStockPrice = functions.https.onCall(
       }
     }
 
+    const returnTimestamp =
+      source === "api"
+        ? new Date().toISOString()
+        : timestamp.toDate().toISOString();
+
     // Return the price and source regardless of caching outcome
     return {
       price,
       source,
-      timestamp: timestamp.toDate().toISOString(),
+      timestamp: returnTimestamp,
     };
   }
 );

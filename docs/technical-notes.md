@@ -23,12 +23,12 @@ firebase emulators:start
 
 curl -X POST \
  -H "Content-Type: application/json" \
- --data '{"data": {"ticker":"AAPL"}}' \
+ --data '{"data": {"ticker":"NVDA"}}' \
  http://localhost:5001/yayo-backend/us-central1/fetchStockPrice
 
 curl -X POST \
  -H "Content-Type: application/json" \
- --data '{"data": {"ticker":"AAPL"}}' \
+ --data '{"data": {"ticker":"NVDA"}}' \
 https://us-central1-yayo-backend.cloudfunctions.net/fetchStockPrice
 
 // Fetch the current environment config to your local machine if you haven't already or if there are updates:
