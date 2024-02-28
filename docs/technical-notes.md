@@ -36,3 +36,6 @@ firebase functions:config:get > .runtimeconfig.json
 // then move file into functions folder
 
 firebase deploy --only functions
+
+// update local indexes with whats in the project
+firebase firestore:indexes > firestore.indexes.json

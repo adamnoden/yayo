@@ -32,5 +32,6 @@ module.exports = {
     "require-jsdoc": "off",
     "max-len": "off",
     "@typescript-eslint/no-unused-vars": "off",
+    "operator-linebreak": "off",
   },
 };

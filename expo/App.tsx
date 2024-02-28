@@ -1,18 +1,12 @@
 import { StatusBar } from "expo-status-bar";
-import { Button, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 
-import { useState } from "react";
+import { StockInfoComponent } from "./src/components";
 
 export default function App() {
-  const [quote, setQuote] = useState<string | undefined>();
-
-  const getQuote = () => {
-    setQuote("$413.43");
-  };
   return (
     <View style={styles.container}>
-      <Text>AAPL:{quote ? quote : "Tap button to fetch latest"} </Text>
-      <Button onPress={getQuote} title="Update Quote" />
+      <StockInfoComponent />
       <StatusBar style="auto" />
     </View>
   );
