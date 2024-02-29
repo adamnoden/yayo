@@ -31,6 +31,11 @@ curl -X POST \
  --data '{"data": {"ticker":"NVDA"}}' \
 https://us-central1-yayo-backend.cloudfunctions.net/fetchStockPrice
 
+curl -X POST \
+ -H "Content-Type: application/json" \
+ --data '{"data": {"query": "apple"}}' \
+ http://localhost:5001/yayo-backend/us-central1/stockLookup
+
 // Fetch the current environment config to your local machine if you haven't already or if there are updates:
 firebase functions:config:get > .runtimeconfig.json
 // then move file into functions folder
