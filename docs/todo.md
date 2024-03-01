@@ -1,20 +1,24 @@
 ## Todo next
 
-- finhubb api key to env
-- wire up to app locally to a manual button to fetch for a single stock
-- deploy firebase fn
+- stock lookup api
+- or figure out stock lookup sitch
 
 ## Todo
 
 - sort out apple developer stuff
-- choose auth type and implement
 - get an expo cloud/tester build?
+- wireframe the app
+- outline screens and navigation
+
+- user profile (is this tied in with auth?)
+- think about username strat. usernames/tags
 
 ## Todo later
 
-- symbol look up
 - book a weeks trade (locally)
+- collection for each player for personal bank account
 - track the trade on app open
+- choose auth type and implement
 
 ## Todo much later
 
