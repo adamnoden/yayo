@@ -1,7 +1,7 @@
 ## Todo next
 
 - stock lookup api
-- or figure out stock lookup sitch
+- need a better api than finhubb
 
 ## Todo
 

@@ -48,3 +48,12 @@ firebase deploy --only functions
 
 // update local indexes with whats in the project
 firebase firestore:indexes > firestore.indexes.json
+
+### Polygon.io
+
+Github login
+
+https://polygon.io/dashboard
+
+https://polygon.io/docs/stocks/get_v3_reference_tickers
+https://polygon.io/docs/stocks/get_v2_last_trade__stocksticker
