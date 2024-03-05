@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { View, Text, Button } from "react-native";
 import { callFetchStockPrice } from "../services/stock-service";
 
-export const StockInfoComponent = () => {
+export const StockInfo = () => {
   const [stockPrice, setStockPrice] = useState<number | null>(null);
 
   const handleFetchPrice = async () => {

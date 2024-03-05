@@ -1,23 +1,38 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, View } from "react-native";
+import React from "react";
+import { View, StyleSheet } from "react-native";
+import { StockInfo, StockSearch } from "./src/components";
 
-import { StockInfoComponent, StockSearch } from "./src/components";
-
-export default function App() {
+const App = () => {
   return (
     <View style={styles.container}>
-      <StockSearch />
-      <StockInfoComponent />
-      <StatusBar style="auto" />
+      <View style={[styles.componentContainer, styles.redBorder]}>
+        <StockSearch />
+      </View>
+      <View style={[styles.componentContainer, styles.blueBorder]}>
+        <StockInfo />
+      </View>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
     justifyContent: "center",
+    alignItems: "center",
+  },
+  componentContainer: {
+    width: "90%", // Adjust based on your layout needs
+    marginBottom: 20, // Adds space between the components
+  },
+  redBorder: {
+    borderColor: "red",
+    borderWidth: 2,
+  },
+  blueBorder: {
+    borderColor: "blue",
+    borderWidth: 2,
   },
 });
+
+export default App;
