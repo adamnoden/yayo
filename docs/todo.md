@@ -1,6 +1,8 @@
 ## Todo next
 
 - stock lookup api
+- error handling
+- two views
 - need a better api than finhubb
 
 ## Todo
