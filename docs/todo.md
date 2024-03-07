@@ -9,8 +9,7 @@
 
 - sort out apple developer stuff
 - get an expo cloud/tester build?
-- wireframe the app
-- outline screens and navigation
+- wireframe the app, outline screens and navigation
 
 - user profile (is this tied in with auth?)
 - think about username strat. usernames/tags
