@@ -1,4 +1,3 @@
-// Example component file: src/components/StockInfoComponent.tsx
 import React, { useEffect, useState } from "react";
 import { View, Text, Button } from "react-native";
 import { callFetchStockPrice } from "../services/stock-service";
@@ -8,8 +7,8 @@ export const StockInfo = () => {
 
   const handleFetchPrice = async () => {
     try {
-      const priceInfo = await callFetchStockPrice("AAPL");
-      setStockPrice(priceInfo.price); // Adjust based on the actual response structure
+      const priceInfo = await callFetchStockPrice("NVDA");
+      setStockPrice(priceInfo.price);
     } catch (error) {
       console.log(error);
     }

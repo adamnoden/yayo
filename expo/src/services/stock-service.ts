@@ -18,6 +18,6 @@ export async function callFetchStockPrice(
     return response.data as ResponseData;
   } catch (error) {
     console.error("Error calling fetchStockPrice:", error);
-    throw error; // Or handle the error as needed
+    throw error;
   }
 }
