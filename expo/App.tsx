@@ -1,15 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, StyleSheet } from "react-native";
 import { StockInfo, StockSearch } from "./src/components";
+import { StockPicker } from "./src/components/StockPicker";
 
 const App = () => {
+  const [ticker, setTicker] = useState<string | null>(null);
   return (
     <View style={styles.container}>
       <View style={[styles.componentContainer, styles.redBorder]}>
-        <StockSearch />
+        {/* <StockSearch /> */}
+        <StockPicker onChange={(t) => setTicker(t)} />
       </View>
       <View style={[styles.componentContainer, styles.blueBorder]}>
-        <StockInfo />
+        <StockInfo ticker={ticker} />
       </View>
     </View>
   );
