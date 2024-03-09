@@ -2,7 +2,7 @@ import * as functions from "firebase-functions";
 import * as admin from "firebase-admin";
 
 import { FieldValue } from "firebase-admin/firestore";
-import { getQuote, searchStocks } from "./services/finhubb";
+import { getQuote } from "./services/finhubb";
 
 admin.initializeApp();
 
@@ -73,29 +73,5 @@ export const fetchStockPrice = functions.https.onCall(
       source,
       timestamp: returnTimestamp,
     };
-  }
-);
-
-export const stockLookup = functions.https.onCall(
-  // TODO: caching?
-  async (data: { query: string }, _context) => {
-    const query = data.query;
-    if (!query) {
-      throw new functions.https.HttpsError(
-        "invalid-argument",
-        "The function must be called with a query string."
-      );
-    }
-
-    try {
-      const results = await searchStocks(query);
-      return { results };
-    } catch (error) {
-      console.error("Error searching stocks:", error);
-      throw new functions.https.HttpsError(
-        "internal",
-        "Unable to search stocks at this time."
-      );
-    }
   }
 );
