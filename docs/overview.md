@@ -2,6 +2,8 @@
 
 ## YAYO
 
+Meanings:
+
 - Yield And Yield Only
 - Yield, Affluence, Yachts, Opulence
 - Yoshimura Asset Yield Observatory
@@ -18,7 +20,7 @@ YAYO: The Retro-Futuristic Finance Odyssey is a dynamic, community-driven stock 
 ## Features:
 
 - Dynamic Market Simulation: Dive into a realistic stock market environment that mirrors the volatility and opportunities of real-world financial markets, allowing for an immersive investment experience without the risk of actual money.
-- Community-Driven Competitions: Form or join investment groups (PFunds), participate in weekly trading competitions, and climb the leaderboards by making savvy investment choices. YAYO’s community-centric approach fosters collaboration, rivalry, and social interaction among players.
+- Community-Driven Competitions: Form or join investment groups (Funds), participate in weekly trading competitions, and climb the leaderboards by making savvy investment choices. YAYO’s community-centric approach fosters collaboration, rivalry, and social interaction among players.
 - Educational Insights: Learn the ropes of financial investment through gameplay. YAYO demystifies complex financial concepts, making it easier for players of all skill levels to understand market trends, investment strategies, and financial planning.
 - Retro-Futuristic Aesthetic: Immerse yourself in a game world that combines the nostalgic feel of retro finance with futuristic elements, featuring a vibrant neon color palette, pixel-art graphics, and a synthwave soundtrack that transports players back in time.
 - Membership Tiers: Choose from Standard, Executive, or Sovereign memberships, each offering different levels of access to features, tools, and exclusive perks, tailored to enhance your trading experience and strategy.
