@@ -75,3 +75,61 @@ export const fetchStockPrice = functions.https.onCall(
     };
   }
 );
+
+export const addStockPick = functions.https.onCall(async (data, _context) => {
+  // if (!context.auth) {
+  //   throw new functions.https.HttpsError('unauthenticated', 'The function must be called while authenticated.');
+  // }
+
+  try {
+    const docRef = await admin.firestore().collection("stock_picks").add({
+      userId: data.userId,
+      ticker: data.ticker,
+      shares: data.shares,
+      buyPrice: data.buyPrice,
+      buyTimestamp: FieldValue.serverTimestamp(),
+      // TODO: a cache also of the last fetched price/timestamp?
+    });
+
+    return { success: true, id: docRef.id };
+  } catch (error) {
+    console.error("Error adding stock pick: ", error);
+    throw new functions.https.HttpsError(
+      "unknown",
+      "Failed to add stock pick",
+      error
+    );
+  }
+});
+
+export const getLatestUserPick = functions.https.onCall(
+  async (data, context) => {
+    // if (!context.auth) {
+    //   throw new functions.https.HttpsError('unauthenticated', 'The function must be called while authenticated.');
+    // }
+
+    try {
+      const userPicksSnapshot = await admin
+        .firestore()
+        .collection("stock_picks")
+        .where("userId", "==", data.userId)
+        .orderBy("buyTimestamp", "desc")
+        .limit(1)
+        .get();
+
+      if (userPicksSnapshot.empty) {
+        return { success: false, message: "No picks found for this user." };
+      } else {
+        const latestPick = userPicksSnapshot.docs[0].data();
+        return { success: true, latestPick: latestPick };
+      }
+    } catch (error) {
+      console.error("Error retrieving latest user pick: ", error);
+      throw new functions.https.HttpsError(
+        "unknown",
+        "Failed to retrieve latest pick",
+        error
+      );
+    }
+  }
+);

@@ -13,6 +13,14 @@
           "order": "DESCENDING"
         }
       ]
+    },
+    {
+      "collectionGroup": "stock_picks",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "userId", "order": "ASCENDING" },
+        { "fieldPath": "buyTimestamp", "order": "DESCENDING" }
+      ]
     }
   ],
   "fieldOverrides": []

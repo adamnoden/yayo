@@ -19,23 +19,6 @@
 
 ## Firebase stuff
 
-firebase emulators:start
-
-curl -X POST \
- -H "Content-Type: application/json" \
- --data '{"data": {"ticker":"NVDA"}}' \
- http://localhost:5001/yayo-backend/us-central1/fetchStockPrice
-
-curl -X POST \
- -H "Content-Type: application/json" \
- --data '{"data": {"ticker":"NVDA"}}' \
-https://us-central1-yayo-backend.cloudfunctions.net/fetchStockPrice
-
-curl -X POST \
- -H "Content-Type: application/json" \
- --data '{"data": {"query": "apple"}}' \
- http://localhost:5001/yayo-backend/us-central1/stockLookup
-
 // add env config
 firebase functions:config:set finnhub.api_key="your_finnhub_api_key_here"
 
