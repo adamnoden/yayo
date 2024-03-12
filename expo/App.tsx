@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { View, StyleSheet } from "react-native";
 import { StockInfo, StockPicker } from "./src/components";
+import { BidPlacer } from "./src/components/BidPlacer";
 
 const App = () => {
   const [ticker, setTicker] = useState<string | null>(null);
@@ -11,6 +12,10 @@ const App = () => {
       </View>
       <View style={[styles.componentContainer, styles.blueBorder]}>
         <StockInfo ticker={ticker} />
+      </View>
+
+      <View style={[styles.componentContainer, styles.greenBorder]}>
+        <BidPlacer ticker={ticker} />
       </View>
     </View>
   );
@@ -31,6 +36,10 @@ const styles = StyleSheet.create({
     borderWidth: 2,
   },
   blueBorder: {
+    borderColor: "blue",
+    borderWidth: 2,
+  },
+  greenBorder: {
     borderColor: "blue",
     borderWidth: 2,
   },
