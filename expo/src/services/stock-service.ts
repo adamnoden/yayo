@@ -41,7 +41,7 @@ export async function addStockPick(
   };
 
   try {
-    const response = await httpsCallable(functions, "addStockPick")({ data });
+    const response = await httpsCallable(functions, "addStockPick")(data);
     console.log("addStockPick response:", response.data);
     return response.data as AddPickResponse;
   } catch (error) {

@@ -34,6 +34,7 @@ export const StockPicker: React.FC<Props> = ({ onChange }) => {
             onChange(value);
           }
         }}
+        listMode="MODAL"
       />
     </View>
   );
