@@ -1,29 +1,15 @@
 ## Todo next
 
-- ability to 'lock' into one stock for a nominal $100 and track that price
+- on app start fetch the price of the locked pick
+- show the current value
+- show the current gains/loss
+- when picking a stock only buy $100 of shares
 - ability to 'unlock' the pick
-
-```
-{
-  userId: "foobar",
-  ticker: "AAPL",
-  shares: 0.5857,
-  buyPrice: 170.73,
-  buyTimestamp: 24 February 2024 at 20:52:35 UTC
-  lastFetchedPrice: 173.24,
-  lastFetchedTimestamp: 25 February 2024 at 20:52:35 UTC
-}
-```
-
-`Number of shares = Investment amount / Share price.`
-
-`e.g. share calculation: $100 / price ($170.73) = 0.5857`
-
-- stock lookup api
-- two views
 
 ## Todo
 
+- some display of market open/close
+- have this in app state as a blocker to trade
 - sort out apple developer stuff
 - get an expo cloud/tester build?
 - wireframe the app, outline screens and navigation
@@ -34,6 +20,7 @@
 
 ## Todo later
 
+- stock lookup api
 - book a weeks trade (locally)
 - collection for each player for personal bank account
 - track the trade on app open
