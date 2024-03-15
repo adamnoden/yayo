@@ -93,7 +93,7 @@ export const BidPlacer: React.FC<Props> = ({ ticker }) => {
       <Text>Ticker: {ticker}</Text>
       <Button
         disabled={!ticker || !!latestPick || loadingAddPick}
-        title={loadingAddPick ? "Submitting..." : "Place Pick"}
+        title={loadingAddPick ? "Submitting..." : "Buy"}
         onPress={handleAddPick}
       />
       {!loadingFetchPick && latestPick && (

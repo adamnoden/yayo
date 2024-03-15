@@ -1,13 +1,16 @@
 ## Todo next
 
-- on app start fetch the price of the locked pick
-- show the current value
-- show the current gains/loss
+- ability to 'unlock' the pick (or just sell?!)
+- the proceeds get stored in the user bank
+
+- bank account collection (current_accounts)
+- user bank acount visible on screen
+
 - when picking a stock only buy $100 of shares
-- ability to 'unlock' the pick
 
 ## Todo
 
+- only buy sell on market open close? (or just display market open/close and let after hours trades)
 - some display of market open/close
 - have this in app state as a blocker to trade
 - sort out apple developer stuff
