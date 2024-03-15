@@ -3,6 +3,7 @@ import { View, Text, Button, StyleSheet } from "react-native";
 import {
   Pick,
   addStockPick,
+  callFetchStockPrice,
   getLatestUserPick,
 } from "../services/stock-service";
 
@@ -17,6 +18,10 @@ export const BidPlacer: React.FC<Props> = ({ ticker }) => {
 
   const [loadingAddPick, setLoadingAddPick] = useState(false);
   const [loadingFetchPick, setLoadingFetchPick] = useState(false);
+  const [loadingFetchPickPrice, setLoadingFetchPickPrice] = useState(false);
+  const [currentStockPrice, setCurrentStockPrice] = useState<number | null>(
+    null
+  );
 
   useEffect(() => {
     // Fetch the latest pick on component mount
@@ -34,6 +39,30 @@ export const BidPlacer: React.FC<Props> = ({ ticker }) => {
     fetchLatestPick();
   }, []);
 
+  useEffect(() => {
+    console.log("in use effect", latestPick);
+    if (!latestPick) {
+      return;
+    }
+    setLoadingFetchPickPrice(true);
+
+    // Fetch the latest price when a pick is retrieved
+    const fetchPickPrice = async () => {
+      if (latestPick.ticker) {
+        try {
+          const res = await callFetchStockPrice(latestPick.ticker);
+          console.log(res);
+          setCurrentStockPrice(res.price);
+        } catch (error) {
+          console.error("Failed to fetch price of pick:", error);
+        }
+      }
+      setLoadingFetchPickPrice(false);
+    };
+
+    fetchPickPrice();
+  }, [latestPick]);
+
   const handleAddPick = async () => {
     if (!ticker) {
       return;
@@ -42,8 +71,6 @@ export const BidPlacer: React.FC<Props> = ({ ticker }) => {
 
     try {
       await addStockPick(userId, ticker, shares, buyPrice);
-      console.log("Stock pick added successfully");
-      // Refresh the latest pick after adding
       const response = await getLatestUserPick(userId);
       setLatestPick(response.latestPick);
     } catch (error) {
@@ -51,6 +78,15 @@ export const BidPlacer: React.FC<Props> = ({ ticker }) => {
     }
     setLoadingAddPick(false);
   };
+
+  // Calculate the price of user's current holdings and the percentage gain/loss
+  const holdingsValue = latestPick
+    ? latestPick.shares * (currentStockPrice || 0)
+    : 0;
+  const gainLossPercentage =
+    latestPick && currentStockPrice
+      ? ((currentStockPrice - latestPick.buyPrice) / latestPick.buyPrice) * 100
+      : 0;
 
   return (
     <View style={styles.container}>
@@ -67,6 +103,34 @@ export const BidPlacer: React.FC<Props> = ({ ticker }) => {
           <Text>Shares: {latestPick.shares}</Text>
           <Text>Buy Price: {latestPick.buyPrice}</Text>
           {/* Displaying buyTimestamp might require formatting */}
+
+          <Text>
+            Current Price:{" "}
+            {loadingFetchPickPrice
+              ? "Loading..."
+              : `$${currentStockPrice?.toFixed(2)}`}{" "}
+          </Text>
+          <Text>
+            Holdings Value:{" "}
+            {loadingFetchPickPrice
+              ? "Loading..."
+              : `$${holdingsValue.toFixed(2)}`}
+          </Text>
+          <Text>
+            {gainLossPercentage >= 0 ? "Gain" : "Loss"}:
+            {loadingFetchPickPrice ? (
+              "Loading..."
+            ) : (
+              <Text
+                style={
+                  gainLossPercentage >= 0 ? styles.positive : styles.negative
+                }
+              >
+                {gainLossPercentage < 0 && "-"}$
+                {Math.abs(gainLossPercentage).toFixed(2)}%
+              </Text>
+            )}
+          </Text>
         </View>
       )}
       {loadingFetchPick && <Text>Loading pick...</Text>}
@@ -80,5 +144,11 @@ const styles = StyleSheet.create({
   },
   latestPick: {
     marginTop: 20,
+  },
+  positive: {
+    color: "green",
+  },
+  negative: {
+    color: "red",
   },
 });
