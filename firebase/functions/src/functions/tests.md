@@ -56,7 +56,7 @@ curl -X POST -H "Content-Type:application/json" \
 curl -X POST -H "Content-Type:application/json" \
      -d '{
           "data": {
-            "pickId": "JCRkYvt6rrtNlpezp79R",
+            "pickId": "p0CsdLWFkJ2yJg8i7Wpa",
             "userId": "foobar",
             "sellPrice": 190.02
           }
