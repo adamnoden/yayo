@@ -71,7 +71,6 @@ export const sellStockPick = functions.https.onCall(async (data, _context) => {
       // Assuming starting balance is 0 if account document doesn't exist. later on will initialise a users account on registration
       newBalance = gainLoss;
     }
-    newBalance = +newBalance.toFixed(2);
 
     // Update the user's account balance
     await accountBalancesRef
@@ -81,6 +80,7 @@ export const sellStockPick = functions.https.onCall(async (data, _context) => {
     return {
       success: true,
       message: "Stock pick sold successfully, account balance updated.",
+      balance: newBalance,
     };
   } catch (error) {
     console.error("Error selling stock pick: ", error);

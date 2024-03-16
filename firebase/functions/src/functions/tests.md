@@ -66,9 +66,9 @@ curl -X POST -H "Content-Type:application/json" \
 curl -X POST -H "Content-Type:application/json" \
      -d '{
           "data": {
-            "pickId": "abc123",
+            "pickId": "2zq5HVih3FgMUXCkhKbX",
             "userId": "foobar",
-            "sellPrice": 150.00
+            "sellPrice": 190.00
           }
         }' \
      https://us-central1-yayo-backend.cloudfunctions.net/sellStockPick

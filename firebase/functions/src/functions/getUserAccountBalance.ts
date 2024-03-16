@@ -13,7 +13,7 @@ export const getUserAccountBalance = functions.https.onCall(
     if (!userId) {
       throw new functions.https.HttpsError(
         "invalid-argument",
-        'The function must be called with one argument "userId".'
+        "The function must be called with one argument 'userId'."
       );
     }
 
