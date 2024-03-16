@@ -88,7 +88,9 @@ export const addStockPick = functions.https.onCall(async (data, _context) => {
       shares: data.shares,
       buyPrice: data.buyPrice,
       buyTimestamp: FieldValue.serverTimestamp(),
-      // TODO: a cache also of the last fetched price/timestamp?
+      sellPrice: null,
+      sellTimestamp: null,
+      isSold: false,
     });
 
     return { success: true, id: docRef.id };
@@ -102,8 +104,90 @@ export const addStockPick = functions.https.onCall(async (data, _context) => {
   }
 });
 
+export const sellStockPick = functions.https.onCall(async (data, _context) => {
+  const {
+    pickId,
+    userId,
+    sellPrice, // this will come from a backend query to be extra proper but for now just pass through what was last queried from the front end
+  } = data;
+  const stockPicksRef = admin.firestore().collection("stock_picks");
+  const accountBalancesRef = admin.firestore().collection("account_balances");
+
+  try {
+    // Retrieve the stock pick to check its current status
+    const pickDoc = await stockPicksRef.doc(pickId).get();
+
+    if (!pickDoc.exists) {
+      throw new functions.https.HttpsError(
+        "not-found",
+        "Stock pick does not exist."
+      );
+    }
+
+    const pickData = pickDoc.data();
+    if (!pickData) {
+      throw new functions.https.HttpsError(
+        "data-loss",
+        "Failed to retrieve stock pick data."
+      );
+    }
+
+    // Check if the stock pick is already sold
+    if (pickData.isSold) {
+      throw new functions.https.HttpsError(
+        "failed-precondition",
+        "This stock pick has already been sold."
+      );
+    }
+
+    // Update the stock pick with sell details
+    await stockPicksRef.doc(pickId).update({
+      sellPrice: sellPrice,
+      sellTimestamp: FieldValue.serverTimestamp(),
+      isSold: true,
+    });
+
+    const gainLoss = (sellPrice - pickData.buyPrice) * pickData.shares;
+
+    // Retrieve or initialize the user's account balance
+    const accountDoc = await accountBalancesRef.doc(userId).get();
+    let newBalance;
+    if (accountDoc.exists) {
+      const accountData = accountDoc.data();
+      if (!accountData) {
+        throw new functions.https.HttpsError(
+          "data-loss",
+          "Failed to retrieve account data."
+        );
+      }
+      newBalance = accountData.balance + gainLoss;
+    } else {
+      // Assuming starting balance is 0 if account document doesn't exist. later on will initialise a users account on registration
+      newBalance = gainLoss;
+    }
+    newBalance = +newBalance.toFixed(2);
+
+    // Update the user's account balance
+    await accountBalancesRef
+      .doc(userId)
+      .set({ balance: newBalance }, { merge: true });
+
+    return {
+      success: true,
+      message: "Stock pick sold successfully, account balance updated.",
+    };
+  } catch (error) {
+    console.error("Error selling stock pick: ", error);
+    throw new functions.https.HttpsError(
+      "unknown",
+      "Failed to sell stock pick",
+      error
+    );
+  }
+});
+
 export const getLatestUserPick = functions.https.onCall(
-  async (data, context) => {
+  async (data, _context) => {
     // if (!context.auth) {
     //   throw new functions.https.HttpsError('unauthenticated', 'The function must be called while authenticated.');
     // }
@@ -121,13 +205,64 @@ export const getLatestUserPick = functions.https.onCall(
         return { success: false, message: "No picks found for this user." };
       } else {
         const latestPick = userPicksSnapshot.docs[0].data();
-        return { success: true, latestPick: latestPick };
+        return {
+          success: true,
+          latestPick: latestPick,
+          pickId: userPicksSnapshot.docs[0].id,
+        };
       }
     } catch (error) {
       console.error("Error retrieving latest user pick: ", error);
       throw new functions.https.HttpsError(
         "unknown",
         "Failed to retrieve latest pick",
+        error
+      );
+    }
+  }
+);
+
+export const getUserAccountBalance = functions.https.onCall(
+  async (data, context) => {
+    // Uncomment the lines below if you want to ensure that only authenticated users can fetch an account balance.
+    // if (!context.auth) {
+    //   throw new functions.https.HttpsError('unauthenticated', 'The function must be called while authenticated.');
+    // }
+
+    const userId = data.userId;
+    if (!userId) {
+      throw new functions.https.HttpsError(
+        "invalid-argument",
+        'The function must be called with one argument "userId".'
+      );
+    }
+
+    try {
+      const accountBalanceDoc = await admin
+        .firestore()
+        .collection("account_balances")
+        .doc(userId)
+        .get();
+
+      if (!accountBalanceDoc.exists) {
+        throw new functions.https.HttpsError(
+          "not-found",
+          "User account balance does not exist."
+        );
+      }
+
+      const accountBalanceData = accountBalanceDoc.data();
+      if (!accountBalanceData) {
+        throw new Error(
+          "accountBalanceData did not exist. this was unexpected"
+        );
+      }
+      return { balance: accountBalanceData.balance }; // Assuming the field that holds the balance is named 'balance'.
+    } catch (error) {
+      console.error("Error fetching user account balance: ", error);
+      throw new functions.https.HttpsError(
+        "unknown",
+        "Failed to fetch user account balance",
         error
       );
     }
