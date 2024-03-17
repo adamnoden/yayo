@@ -13,6 +13,7 @@ export const getLatestUserPick = functions.https.onCall(
         .firestore()
         .collection(STOCK_PICKS_COLLECTION_NAME)
         .where("userId", "==", data.userId)
+        .where("isSold", "==", false)
         .orderBy("buyTimestamp", "desc")
         .limit(1)
         .get();

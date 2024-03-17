@@ -6,6 +6,7 @@ const COLORS = {
   reset: "\x1b[0m",
   green: "\x1b[32m",
   red: "\x1b[31m",
+  bgGreen: "\x1b[42m",
 };
 
 const logSuccess = (message) => {
@@ -14,6 +15,12 @@ const logSuccess = (message) => {
 
 const logError = (message) => {
   console.error(`${COLORS.red}✖${COLORS.reset} ${message}`);
+};
+
+const logAllTestsPassed = (message) => {
+  console.log(
+    `\n${COLORS.bgGreen}                 ${message}                 ${COLORS.reset}\n`
+  );
 };
 
 async function checkEmulatorRunning() {
@@ -40,4 +47,5 @@ module.exports = {
   logSuccess,
   logError,
   checkEmulatorRunning,
+  logAllTestsPassed,
 };
