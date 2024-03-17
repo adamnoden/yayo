@@ -1,6 +1,24 @@
 {
   "indexes": [
     {
+      "collectionGroup": "stock_picks",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "userId",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "isSold",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "buyTimestamp",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
       "collectionGroup": "stock_prices",
       "queryScope": "COLLECTION",
       "fields": [
@@ -12,14 +30,6 @@
           "fieldPath": "timestamp",
           "order": "DESCENDING"
         }
-      ]
-    },
-    {
-      "collectionGroup": "stock_picks",
-      "queryScope": "COLLECTION",
-      "fields": [
-        { "fieldPath": "userId", "order": "ASCENDING" },
-        { "fieldPath": "buyTimestamp", "order": "DESCENDING" }
       ]
     }
   ],

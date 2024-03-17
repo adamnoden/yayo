@@ -12,3 +12,6 @@ firebase deploy --only functions
 
 // update local indexes with whats in the project
 firebase firestore:indexes > firestore.indexes.json
+
+// can also deploy indexes if edits made locally
+firebase deploy --only firestore:indexes
