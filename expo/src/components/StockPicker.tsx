@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { View, StyleSheet } from "react-native";
 import DropDownPicker from "react-native-dropdown-picker";
-import { STOCK_LIST } from "../../constants/stock-list";
+import { STOCK_LIST } from "../constants/stock-list";
 
 const transformedStockList = STOCK_LIST.map((stock) => ({
   label: `${stock.name} (${stock.ticker})`,

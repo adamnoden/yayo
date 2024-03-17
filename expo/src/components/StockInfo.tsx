@@ -7,8 +7,10 @@ interface Props {
 }
 export const StockInfo: React.FC<Props> = ({ ticker }) => {
   const [stockPrice, setStockPrice] = useState<number | null>(null);
+  const [loading, setLoading] = useState(false);
 
   const handleFetchPrice = async () => {
+    setLoading(true);
     try {
       if (!ticker) {
         return;
@@ -17,6 +19,8 @@ export const StockInfo: React.FC<Props> = ({ ticker }) => {
       setStockPrice(priceInfo.price);
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -29,7 +33,11 @@ export const StockInfo: React.FC<Props> = ({ ticker }) => {
       <Text>
         {ticker} stock Price: {stockPrice}
       </Text>
-      <Button title="Refresh Price" onPress={handleFetchPrice} />
+      <Button
+        disabled={loading}
+        title={loading ? "Loading..." : "Refresh"}
+        onPress={handleFetchPrice}
+      />
     </View>
   );
 };

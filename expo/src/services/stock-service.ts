@@ -50,6 +50,21 @@ export async function addStockPick(
   }
 }
 
+export const sellStockPick = async (
+  pickId: string,
+  userId: string,
+  sellPrice: number // TODO: this should come from the server
+) => {
+  try {
+    const sellStockPickCallable = httpsCallable(functions, "sellStockPick");
+    const result = await sellStockPickCallable({ pickId, userId, sellPrice });
+    return result.data;
+  } catch (error) {
+    console.error("Error selling stock pick:", error);
+    throw error;
+  }
+};
+
 export interface Pick {
   userId: string;
   ticker: string;
@@ -58,9 +73,13 @@ export interface Pick {
   buyTimestamp: string; // Assuming the date is returned as a string
   lastFetchedPrice?: number;
   lastFetchedTimestamp?: string; // Optional, if you decide to include fetching logic later
+  isSold: boolean;
+  sellPrice: number | null;
+  sellTimestamp: string | null;
 }
 
 interface GetPickResponse {
+  pickId: string;
   success: boolean;
   latestPick?: Pick;
   message?: string; // Optional, for errors or informational messages
