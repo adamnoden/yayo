@@ -34,7 +34,13 @@ export const fetchStockPrice = functions.https.onCall(
         timestamp = cachedData.timestamp;
       } else {
         // No cache found, fetch new price
-        price = await getQuote(ticker);
+
+        // local tests
+        if (ticker.startsWith("YAYO-TEST-TICKER")) {
+          price = 101;
+        } else {
+          price = await getQuote(ticker);
+        }
         source = "api";
         timestamp = FieldValue.serverTimestamp();
       }

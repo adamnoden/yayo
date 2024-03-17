@@ -84,6 +84,11 @@ curl -X POST \
 
 curl -X POST \
  -H "Content-Type: application/json" \
+ --data '{"data": {"ticker":"TEST"}}' \
+ http://localhost:5001/yayo-backend/us-central1/fetchStockPrice
+
+curl -X POST \
+ -H "Content-Type: application/json" \
  --data '{"data": {"ticker":"NVDA"}}' \
 https://us-central1-yayo-backend.cloudfunctions.net/fetchStockPrice
 ```
