@@ -1,12 +1,7 @@
 ## Todo next
 
-- ability to 'unlock' the pick (or just sell?!)
-- the proceeds get stored in the user bank
-
-- bank account collection (current_accounts)
-- user bank acount visible on screen
-
 - when picking a stock only buy $100 of shares
+- auth
 
 ## Todo
 
