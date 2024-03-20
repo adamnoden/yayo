@@ -12,8 +12,13 @@ import { MOCK_USER_ID } from "../constants";
 interface Props {
   ticker: string | null;
   quotePrice: number | null;
+  onTradeEvent: () => void;
 }
-export const BidPlacer: React.FC<Props> = ({ ticker, quotePrice }) => {
+export const BidPlacer: React.FC<Props> = ({
+  ticker,
+  quotePrice,
+  onTradeEvent,
+}) => {
   const [latestPick, setLatestPick] = useState<Pick | undefined>();
   const [latestPickId, setLatestPickId] = useState<string | undefined>();
 
@@ -82,8 +87,10 @@ export const BidPlacer: React.FC<Props> = ({ ticker, quotePrice }) => {
       setLatestPickId(response.pickId);
     } catch (error) {
       console.error("Failed to add stock pick:", error);
+    } finally {
+      setLoadingAddPick(false);
+      onTradeEvent();
     }
-    setLoadingAddPick(false);
   };
 
   const handleSell = async () => {
@@ -102,6 +109,7 @@ export const BidPlacer: React.FC<Props> = ({ ticker, quotePrice }) => {
       console.error(error);
     } finally {
       setLoadingSellPick(false);
+      onTradeEvent();
     }
   };
 

@@ -7,12 +7,16 @@ import UserBalance from "./src/components/UserBalance";
 
 const App = () => {
   const [ticker, setTicker] = useState<string | null>(null);
+  const [tradeEventNonce, setTradeEventNonce] = useState<number>(0);
   const [quotePrice, setQuotePrice] = useState<number | null>(null);
 
+  const handleTradeEvent = () => {
+    setTradeEventNonce((prev) => prev + 1);
+  };
   return (
     <View style={styles.container}>
       <View style={[styles.componentContainer, styles.greenBorder]}>
-        <UserBalance />
+        <UserBalance tradeEventNonce={tradeEventNonce} />
       </View>
       <View style={[styles.componentContainer, styles.redBorder]}>
         <StockPicker onChange={(t) => setTicker(t)} />
@@ -26,7 +30,11 @@ const App = () => {
       </View>
 
       <View style={[styles.componentContainer, styles.greenBorder]}>
-        <BidPlacer ticker={ticker} quotePrice={quotePrice} />
+        <BidPlacer
+          ticker={ticker}
+          quotePrice={quotePrice}
+          onTradeEvent={handleTradeEvent}
+        />
       </View>
     </View>
   );
