@@ -4,14 +4,14 @@ import { MOCK_USER_ID } from "../constants";
 import { fetchUserAccountBalance } from "../services/user-service";
 
 const UserBalance = () => {
-  const [balance, setBalance] = useState<number | null>(null);
+  const [balance, setBalance] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
   const getBalance = async () => {
     setLoading(true);
     try {
       const response = await fetchUserAccountBalance(MOCK_USER_ID);
-      setBalance(response.balance);
+      setBalance(response.balance.toFixed(2));
     } catch (error) {
       Alert.alert("Error", "Failed to fetch account balance");
       console.error(error);

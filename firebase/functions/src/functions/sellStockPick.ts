@@ -53,7 +53,8 @@ export const sellStockPick = functions.https.onCall(async (data, _context) => {
       isSold: true,
     });
 
-    const gainLoss = (sellPrice - pickData.buyPrice) * pickData.shares;
+    const total = sellPrice * pickData.shares;
+    console.log(`Selling for total of ${total}`);
 
     // Retrieve or initialize the user's account balance
     const accountDoc = await accountBalancesRef.doc(userId).get();
@@ -66,10 +67,10 @@ export const sellStockPick = functions.https.onCall(async (data, _context) => {
           "Failed to retrieve account data."
         );
       }
-      newBalance = accountData.balance + gainLoss;
+      newBalance = accountData.balance + total;
     } else {
       // Assuming starting balance is 0 if account document doesn't exist. later on will initialise a users account on registration
-      newBalance = gainLoss;
+      newBalance = total;
     }
 
     // Update the user's account balance

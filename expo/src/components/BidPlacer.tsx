@@ -11,12 +11,11 @@ import { MOCK_USER_ID } from "../constants";
 
 interface Props {
   ticker: string | null;
+  quotePrice: number | null;
 }
-export const BidPlacer: React.FC<Props> = ({ ticker }) => {
+export const BidPlacer: React.FC<Props> = ({ ticker, quotePrice }) => {
   const [latestPick, setLatestPick] = useState<Pick | undefined>();
   const [latestPickId, setLatestPickId] = useState<string | undefined>();
-  const shares = 1; // Example share quantity
-  const buyPrice = 100; // Example buy price, replace with real data or fetch method
 
   const [loadingAddPick, setLoadingAddPick] = useState(false);
   const [loadingSellPick, setLoadingSellPick] = useState(false);
@@ -44,7 +43,6 @@ export const BidPlacer: React.FC<Props> = ({ ticker }) => {
   }, []);
 
   useEffect(() => {
-    console.log("in use effect", latestPick);
     if (!latestPick) {
       return;
     }
@@ -68,13 +66,17 @@ export const BidPlacer: React.FC<Props> = ({ ticker }) => {
   }, [latestPick]);
 
   const handleAddPick = async () => {
-    if (!ticker) {
+    console.log("Buying", ticker, quotePrice);
+    if (!ticker || !quotePrice) {
+      console.error("Missing something", ticker, quotePrice);
       return;
     }
     setLoadingAddPick(true);
 
+    const shares = 1; // TODO: calculate from input
+
     try {
-      await addStockPick(MOCK_USER_ID, ticker, shares, buyPrice);
+      await addStockPick(MOCK_USER_ID, ticker, shares, quotePrice);
       const response = await getLatestUserPick(MOCK_USER_ID);
       setLatestPick(response.latestPick);
       setLatestPickId(response.pickId);
@@ -133,7 +135,7 @@ export const BidPlacer: React.FC<Props> = ({ ticker }) => {
           <Text>Sold: {latestPick.isSold ? "yes" : "no"}</Text>
           <Text>Ticker: {latestPick.ticker}</Text>
           <Text>Shares: {latestPick.shares}</Text>
-          <Text>Buy Price: {latestPick.buyPrice}</Text>
+          <Text>Buy Price: ${latestPick.buyPrice}</Text>
           {/* Displaying buyTimestamp might require formatting */}
 
           <Text>

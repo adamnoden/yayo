@@ -4,9 +4,14 @@ import { callFetchStockPrice } from "../services/stock-service";
 
 interface Props {
   ticker: string | null;
+  quotePrice: number | null;
+  setQuotePrice: (price: number | null) => void;
 }
-export const StockInfo: React.FC<Props> = ({ ticker }) => {
-  const [stockPrice, setStockPrice] = useState<number | null>(null);
+export const StockInfo: React.FC<Props> = ({
+  ticker,
+  quotePrice,
+  setQuotePrice,
+}) => {
   const [loading, setLoading] = useState(false);
 
   const handleFetchPrice = async () => {
@@ -16,7 +21,7 @@ export const StockInfo: React.FC<Props> = ({ ticker }) => {
         return;
       }
       const priceInfo = await callFetchStockPrice(ticker);
-      setStockPrice(priceInfo.price);
+      setQuotePrice(priceInfo.price);
     } catch (error) {
       console.log(error);
     } finally {
@@ -25,17 +30,19 @@ export const StockInfo: React.FC<Props> = ({ ticker }) => {
   };
 
   useEffect(() => {
-    setStockPrice(null);
+    setQuotePrice(null);
   }, [ticker]);
 
   return (
     <View>
-      <Text>
-        {ticker} stock Price: {stockPrice}
-      </Text>
+      {quotePrice && (
+        <Text>
+          {ticker} quote price: ${quotePrice}
+        </Text>
+      )}
       <Button
         disabled={loading}
-        title={loading ? "Loading..." : "Refresh"}
+        title={loading ? "Loading..." : quotePrice ? "Refresh" : "Get quote"}
         onPress={handleFetchPrice}
       />
     </View>
