@@ -1,7 +1,6 @@
 ## Todo next
 
-- test the selling takes away from account
-- when picking a stock only buy $100 of shares
+- when picking a stock only buy $100 of shares (OR figure out whats happening here)
 - user profile (is this tied in with auth?)
 
 ## Todo
