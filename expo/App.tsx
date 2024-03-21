@@ -4,6 +4,7 @@ import { BidPlacer } from "./src/components/BidPlacer";
 import { StockPicker } from "./src/components/StockPicker";
 import { StockInfo } from "./src/components/StockInfo";
 import UserBalance from "./src/components/UserBalance";
+import { MarketStatus } from "./src/components/MarketStatus";
 
 const App = () => {
   const [ticker, setTicker] = useState<string | null>(null);
@@ -15,10 +16,13 @@ const App = () => {
   };
   return (
     <View style={styles.container}>
+      <View style={[styles.componentContainer]}>
+        <MarketStatus />
+      </View>
       <View style={[styles.componentContainer, styles.greenBorder]}>
         <UserBalance tradeEventNonce={tradeEventNonce} />
       </View>
-      <View style={[styles.componentContainer, styles.redBorder]}>
+      <View style={[styles.componentContainer]}>
         <StockPicker onChange={(t) => setTicker(t)} />
       </View>
       <View style={[styles.componentContainer, styles.blueBorder]}>

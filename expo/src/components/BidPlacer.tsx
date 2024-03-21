@@ -78,7 +78,7 @@ export const BidPlacer: React.FC<Props> = ({
     }
     setLoadingAddPick(true);
 
-    const shares = 1; // TODO: calculate from input
+    const shares = 100 / quotePrice;
 
     try {
       await addStockPick(MOCK_USER_ID, ticker, shares, quotePrice);
@@ -126,7 +126,7 @@ export const BidPlacer: React.FC<Props> = ({
     <View style={styles.container}>
       <Text>Ticker: {ticker}</Text>
       <Button
-        disabled={!ticker || !!latestPick || loadingAddPick}
+        disabled={!ticker || !!latestPick || loadingAddPick || !quotePrice}
         title={loadingAddPick ? "Submitting..." : "Buy"}
         onPress={handleAddPick}
       />
@@ -142,7 +142,7 @@ export const BidPlacer: React.FC<Props> = ({
           <Text>Latest Pick:</Text>
           <Text>Sold: {latestPick.isSold ? "yes" : "no"}</Text>
           <Text>Ticker: {latestPick.ticker}</Text>
-          <Text>Shares: {latestPick.shares}</Text>
+          <Text>Shares: {latestPick.shares.toFixed(2)}</Text>
           <Text>Buy Price: ${latestPick.buyPrice}</Text>
           {/* Displaying buyTimestamp might require formatting */}
 
