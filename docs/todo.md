@@ -1,9 +1,12 @@
 ## Todo next
 
-- user profile (is this tied in with auth?)
+- auth
+- user profile
+- navigation setup
 
 ## Todo
 
+- caching some stuff locally like last pick and user balance
 - sort out apple developer stuff
 - get an expo cloud/tester build?
 - wireframe the app, outline screens and navigation
@@ -13,7 +16,6 @@
 ## Todo later
 
 - stock lookup api
-- choose auth type and implement
 
 ## Todo much later
 
