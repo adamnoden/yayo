@@ -1,5 +1,6 @@
 ## Todo next
 
+- update deps
 - modify market closed to give timer to when it opens
 - auth
 - user profile route based on user id

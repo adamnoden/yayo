@@ -22,7 +22,7 @@ export function isMarketOpen(): boolean {
   }
 
   // Check for market hours, adjusting for user's local timezone to ET
-  return isWithinMarketHours(now);
+  return isWithinMarketHours();
 }
 
 // Function to calculate U.S. holidays
@@ -42,16 +42,31 @@ function getUSHolidays(year: number): Date[] {
 }
 
 // Function to check if the current time is within market hours
-function isWithinMarketHours(date: Date): boolean {
-  const userTime = date.toLocaleString("en-US", {
-    timeZone: "America/New_York",
-  });
-  const marketOpen = new Date(userTime);
-  marketOpen.setHours(9, 30, 0); // Market opens at 9:30 AM ET
-  const marketClose = new Date(userTime);
-  marketClose.setHours(16, 0, 0); // Market closes at 4:00 PM ET
+function isWithinMarketHours(): boolean {
+  const now = new Date();
+  const utcHour = now.getUTCHours();
 
-  return date >= marketOpen && date < marketClose;
+  // Determine if current date is within DST for the U.S. (Eastern Time)
+  // DST starts on the second Sunday in March and ends on the first Sunday in November.
+  const startDST = new Date(
+    now.getFullYear(),
+    2,
+    14 - (new Date(now.getFullYear(), 2, 1).getDay() || 7)
+  );
+  const endDST = new Date(
+    now.getFullYear(),
+    10,
+    7 - (new Date(now.getFullYear(), 10, 1).getDay() || 7)
+  );
+  const isDST = now >= startDST && now < endDST;
+
+  // Adjust for Eastern Time, considering DST
+  const etHour = isDST ? utcHour - 4 : utcHour - 5;
+
+  // Market hours are from 9:30 AM to 4:00 PM ET
+  const isOpen = etHour >= 9.5 && etHour < 16;
+
+  return isOpen;
 }
 
 // Helper functions for holiday calculations (thirdMonday, firstMonday, fourthThursday, nthWeekdayOfMonth, lastMonday) go here, unchanged.

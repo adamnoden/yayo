@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Pressable, Text } from "react-native";
-import { BidPlacer } from "../../src/components/BidPlacer";
-import { StockPicker } from "../../src/components/StockPicker";
-import { StockInfo } from "../../src/components/StockInfo";
-import UserBalance from "../../src/components/UserBalance";
-import { MarketStatus } from "../../src/components/MarketStatus";
+import { View, StyleSheet } from "react-native";
+import { BidPlacer } from "../../components/BidPlacer";
+import { StockPicker } from "../../components/StockPicker";
+import { StockInfo } from "../../components/StockInfo";
+import UserBalance from "../../components/UserBalance";
+import { MarketStatus } from "../../components/MarketStatus";
 import { Link } from "expo-router";
 
 const App = () => {
