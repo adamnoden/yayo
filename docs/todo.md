@@ -1,5 +1,7 @@
 ## Todo next
 
+- cache stuff, no need to reload pick after navigation
+- modify market closed to give timer to when it opens
 - auth
 - user profile
 - navigation setup
