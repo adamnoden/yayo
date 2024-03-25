@@ -6,14 +6,8 @@ const Profile: React.FC = () => {
   return (
     <View style={styles.container}>
       <View style={[styles.componentContainer]}>
-        <Link href="/" asChild>
-          <Pressable>
-            <Text>&#8592; Home</Text>
-          </Pressable>
-        </Link>
+        <Text>Todo</Text>
       </View>
-
-      <Text>Profile</Text>
     </View>
   );
 };
@@ -23,11 +17,12 @@ const styles = StyleSheet.create({
     flex: 1,
     // justifyContent: "center",
     alignItems: "center",
-    marginTop: 50,
+    backgroundColor: "white",
   },
   componentContainer: {
     width: "90%",
     marginBottom: 20,
+    marginTop: 50,
   },
 });
 

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { View, StyleSheet, Pressable, Text } from "react-native";
-import { BidPlacer } from "../src/components/BidPlacer";
-import { StockPicker } from "../src/components/StockPicker";
-import { StockInfo } from "../src/components/StockInfo";
-import UserBalance from "../src/components/UserBalance";
-import { MarketStatus } from "../src/components/MarketStatus";
+import { BidPlacer } from "../../src/components/BidPlacer";
+import { StockPicker } from "../../src/components/StockPicker";
+import { StockInfo } from "../../src/components/StockInfo";
+import UserBalance from "../../src/components/UserBalance";
+import { MarketStatus } from "../../src/components/MarketStatus";
 import { Link } from "expo-router";
 
 const App = () => {
@@ -17,13 +17,6 @@ const App = () => {
   };
   return (
     <View style={styles.container}>
-      <View style={[styles.componentContainer]}>
-        <Link href="/profile" asChild>
-          <Pressable>
-            <Text>👤 Profile</Text>
-          </Pressable>
-        </Link>
-      </View>
       <View style={[styles.componentContainer]}>
         <MarketStatus />
       </View>
@@ -57,6 +50,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: "white",
   },
   componentContainer: {
     width: "90%",

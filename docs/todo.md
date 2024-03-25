@@ -1,13 +1,13 @@
 ## Todo next
 
-- cache stuff, no need to reload pick after navigation
 - modify market closed to give timer to when it opens
 - auth
-- user profile
+- user profile route based on user id
 - navigation setup
 
 ## Todo
 
+- public user profile, or a single profile that adaps on current user
 - caching some stuff locally like last pick and user balance
 - sort out apple developer stuff
 - get an expo cloud/tester build?
