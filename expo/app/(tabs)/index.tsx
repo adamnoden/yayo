@@ -4,7 +4,7 @@ import { BidPlacer } from "../../components/BidPlacer";
 import { StockPicker } from "../../components/StockPicker";
 import { StockInfo } from "../../components/StockInfo";
 import UserBalance from "../../components/UserBalance";
-import { MarketStatus } from "../../components/MarketStatus";
+import { MarketStatusComponent } from "../../components/MarketStatus";
 import { Link } from "expo-router";
 
 const App = () => {
@@ -18,7 +18,7 @@ const App = () => {
   return (
     <View style={styles.container}>
       <View style={[styles.componentContainer]}>
-        <MarketStatus />
+        <MarketStatusComponent />
       </View>
       <View style={[styles.componentContainer, styles.greenBorder]}>
         <UserBalance tradeEventNonce={tradeEventNonce} />

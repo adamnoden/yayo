@@ -1,1 +1,1 @@
-export { isMarketOpen } from "./isMarketOpen";
+export { getMarketStatus, MarketStatus } from "./getMarketStatus";

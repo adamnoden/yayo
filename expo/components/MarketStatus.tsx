@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet } from "react-native";
-import { isMarketOpen } from "../utils";
+import { getMarketStatus, MarketStatus } from "../utils";
 
-export function MarketStatus() {
-  const [marketOpen, setMarketOpen] = useState(false);
+export function MarketStatusComponent() {
+  const [marketStatus, setMarketStatus] = useState<MarketStatus | null>(null);
 
   useEffect(() => {
     const checkMarketStatus = () => {
-      setMarketOpen(isMarketOpen());
+      setMarketStatus(getMarketStatus());
     };
 
     checkMarketStatus();
@@ -17,10 +17,13 @@ export function MarketStatus() {
     return () => clearInterval(interval);
   }, []);
 
+  const marketOpen = marketStatus && marketStatus.isOpen;
+  const closeReason = marketStatus && marketStatus.reason;
   return (
     <View style={styles.container}>
       <Text style={[styles.status, marketOpen ? styles.open : styles.closed]}>
         Market {marketOpen ? "OPEN" : "CLOSED"}
+        {closeReason && `: ${closeReason}`}
       </Text>
     </View>
   );
@@ -37,7 +40,6 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 16,
     fontWeight: "bold",
-    width: 150,
     textAlign: "center",
     color: "white",
   },

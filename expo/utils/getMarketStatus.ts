@@ -1,7 +1,17 @@
+enum MarketClosureReason {
+  Holiday = "Holiday",
+  Weekend = "Weekend",
+  OutOfMarketHours = "Out of market hours",
+}
+export interface MarketStatus {
+  isOpen: boolean;
+  reason: MarketClosureReason | null; // null when market open
+  // timeUntilNextOpen: string | null; // null when market open
+}
 /**
  * Returns true if the NYSE/NASDAQ market is open, considering weekdays, DST adjustments for Eastern Time, and a simplified version of U.S. holidays.
  */
-export function isMarketOpen(): boolean {
+export function getMarketStatus(): MarketStatus {
   const now = new Date();
   const year = now.getFullYear();
   const month = now.getMonth();
@@ -16,13 +26,32 @@ export function isMarketOpen(): boolean {
     (holiday) => holiday.getMonth() === month && holiday.getDate() === date
   );
 
-  // Check for weekends and holidays
-  if (dayOfWeek === 0 || dayOfWeek === 6 || isHoliday) {
-    return false;
+  if (isHoliday) {
+    return {
+      isOpen: false,
+      reason: MarketClosureReason.Holiday,
+    };
+  }
+
+  if (dayOfWeek === 0 || dayOfWeek === 6) {
+    return {
+      isOpen: false,
+      reason: MarketClosureReason.Weekend,
+    };
   }
 
   // Check for market hours, adjusting for user's local timezone to ET
-  return isWithinMarketHours();
+  if (!isWithinMarketHours()) {
+    return {
+      isOpen: false,
+      reason: MarketClosureReason.OutOfMarketHours,
+    };
+  }
+
+  return {
+    isOpen: true,
+    reason: null,
+  };
 }
 
 // Function to calculate U.S. holidays
