@@ -58,18 +58,15 @@ function isWithinMarketHours(): boolean {
     10,
     7 - (new Date(now.getFullYear(), 10, 1).getDay() || 7)
   );
-  const isDST = now >= startDST && now < endDST;
 
   // Adjust for Eastern Time, considering DST
-  const etHour = isDST ? utcHour - 4 : utcHour - 5;
+  const etHour = isDST(now) ? utcHour - 4 : utcHour - 5;
 
   // Market hours are from 9:30 AM to 4:00 PM ET
   const isOpen = etHour >= 9.5 && etHour < 16;
 
   return isOpen;
 }
-
-// Helper functions for holiday calculations (thirdMonday, firstMonday, fourthThursday, nthWeekdayOfMonth, lastMonday) go here, unchanged.
 
 // Function to calculate Good Friday based on Easter Sunday
 function calculateGoodFriday(year: number): Date {
@@ -80,13 +77,28 @@ function calculateGoodFriday(year: number): Date {
   return goodFriday;
 }
 
-// Placeholder for Easter calculation - implement the actual Computus algorithm or use a library
+/**
+ * This algorithm computes the date of Easter Sunday for any given year in the Gregorian calendar system.
+ *  It works by calculating a series of intermediate values that, when combined, yield the month and day of Easter.
+ */
 function calculateEaster(year: number): Date {
-  // This is a placeholder. Implement the actual algorithm or use an existing library.
-  return new Date(year, 3, 14); // Example date, replace with actual calculation
-}
+  const a = year % 19;
+  const b = Math.floor(year / 100);
+  const c = year % 100;
+  const d = Math.floor(b / 4);
+  const e = b % 4;
+  const f = Math.floor((b + 8) / 25);
+  const g = Math.floor((b - f + 1) / 3);
+  const h = (19 * a + b - d - g + 15) % 30;
+  const i = Math.floor(c / 4);
+  const k = c % 4;
+  const l = (32 + 2 * e + 2 * i - h - k) % 7;
+  const m = Math.floor((a + 11 * h + 22 * l) / 451);
+  const month = Math.floor((h + l - 7 * m + 114) / 31);
+  const day = ((h + l - 7 * m + 114) % 31) + 1;
 
-// Function to determine if the current date is in DST - unchanged from your original implementation
+  return new Date(year, month - 1, day); // JavaScript months are 0-indexed
+}
 
 // Helpers for holiday calculations
 function thirdMonday(year: number, month: number): number {
@@ -120,7 +132,12 @@ function lastMonday(year: number, month: number): number {
 
 // Determine if the current date is in DST
 function isDST(date: Date): boolean {
-  const jan = new Date(date.getFullYear(), 0, 1).getTimezoneOffset();
-  const jul = new Date(date.getFullYear(), 6, 1).getTimezoneOffset();
-  return Math.max(jan, jul) !== date.getTimezoneOffset();
+  const year = date.getFullYear();
+  // DST starts on the second Sunday in March
+  const dstStart = new Date(year, 2, 14 - (new Date(year, 2, 1).getDay() || 7));
+  // DST ends on the first Sunday in November
+  const dstEnd = new Date(year, 10, 7 - (new Date(year, 10, 1).getDay() || 7));
+
+  // Compare current date to DST start and end
+  return date >= dstStart && date < dstEnd;
 }
