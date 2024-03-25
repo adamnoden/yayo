@@ -11,7 +11,7 @@ export function MarketStatusComponent() {
     };
 
     checkMarketStatus();
-    // Optionally, set an interval to regularly check the market status
+    // TODO: when it gets to the last 5 minutes either end make this timer a lot more accurate
     const interval = setInterval(checkMarketStatus, 60 * 1000); // Check every minute
 
     return () => clearInterval(interval);
@@ -19,11 +19,15 @@ export function MarketStatusComponent() {
 
   const marketOpen = marketStatus && marketStatus.isOpen;
   const closeReason = marketStatus && marketStatus.reason;
+  const nextChange = marketStatus && marketStatus.timeUntilNextOpenOrClose;
   return (
     <View style={styles.container}>
       <Text style={[styles.status, marketOpen ? styles.open : styles.closed]}>
         Market {marketOpen ? "OPEN" : "CLOSED"}
-        {closeReason && `: ${closeReason}`}
+      </Text>
+      <Text>
+        {closeReason && `${closeReason}`}.{" "}
+        {marketOpen ? "Closed in " : "Open in"}: {nextChange}
       </Text>
     </View>
   );
@@ -39,6 +43,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
     paddingVertical: 10,
     paddingHorizontal: 16,
+    marginBottom: 12,
     fontWeight: "bold",
     textAlign: "center",
     color: "white",

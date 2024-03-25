@@ -6,30 +6,24 @@ enum MarketClosureReason {
 export interface MarketStatus {
   isOpen: boolean;
   reason: MarketClosureReason | null; // null when market open
-  // timeUntilNextOpen: string | null; // null when market open
+  timeUntilNextOpenOrClose: string;
 }
 /**
- * Returns true if the NYSE/NASDAQ market is open, considering weekdays, DST adjustments for Eastern Time, and a simplified version of U.S. holidays.
+ * Checks if the NYSE/NASDAQ market is open, considering weekdays, DST adjustments for Eastern Time, and a simplified version of U.S. holidays.
+ * Returns the status, including a reason if it is closed and time until next open or close
  */
 export function getMarketStatus(): MarketStatus {
   const now = new Date();
-  const year = now.getFullYear();
-  const month = now.getMonth();
-  const date = now.getDate();
   const dayOfWeek = now.getDay();
 
-  // U.S. holidays including Good Friday
-  const holidays = getUSHolidays(year);
-
   // Check if today is a holiday
-  const isHoliday = holidays.some(
-    (holiday) => holiday.getMonth() === month && holiday.getDate() === date
-  );
+  const isHoliday = isUSHoliday(now);
 
   if (isHoliday) {
     return {
       isOpen: false,
       reason: MarketClosureReason.Holiday,
+      timeUntilNextOpenOrClose: calculateTimeUntilNextOpenOrClose(now, false),
     };
   }
 
@@ -37,6 +31,7 @@ export function getMarketStatus(): MarketStatus {
     return {
       isOpen: false,
       reason: MarketClosureReason.Weekend,
+      timeUntilNextOpenOrClose: calculateTimeUntilNextOpenOrClose(now, false),
     };
   }
 
@@ -45,12 +40,14 @@ export function getMarketStatus(): MarketStatus {
     return {
       isOpen: false,
       reason: MarketClosureReason.OutOfMarketHours,
+      timeUntilNextOpenOrClose: calculateTimeUntilNextOpenOrClose(now, false),
     };
   }
 
   return {
     isOpen: true,
     reason: null,
+    timeUntilNextOpenOrClose: calculateTimeUntilNextOpenOrClose(now, true),
   };
 }
 
@@ -169,4 +166,69 @@ function isDST(date: Date): boolean {
 
   // Compare current date to DST start and end
   return date >= dstStart && date < dstEnd;
+}
+
+function calculateTimeUntilNextOpenOrClose(now: Date, isOpen: boolean): string {
+  let targetTime: Date;
+
+  if (isOpen) {
+    // Calculate time until market close
+    const closeTime = new Date(now);
+    closeTime.setHours(16, 0, 0, 0); // Market closes at 4:00 PM ET
+    targetTime = closeTime;
+  } else {
+    // Calculate time until market open
+    // This part is more complex because you have to consider the next day the market is open (could be next weekday or after a holiday)
+    targetTime = calculateNextMarketOpenTime(now);
+  }
+
+  // Calculate the difference in milliseconds
+  const diff = targetTime.getTime() - now.getTime();
+
+  // Convert milliseconds to a more human-readable form (e.g., hours, minutes)
+  return formatTimeDiff(diff);
+}
+
+function calculateNextMarketOpenTime(now: Date): Date {
+  let nextOpen = new Date(now);
+  nextOpen.setHours(9, 30, 0, 0); // Set to 9:30 AM ET
+
+  // If it's past 9:30 AM ET, move to the next day
+  if (now.getHours() > 9 || (now.getHours() === 9 && now.getMinutes() > 30)) {
+    nextOpen.setDate(nextOpen.getDate() + 1);
+  }
+
+  // Move to the next day if it's weekend or holiday
+  while (
+    nextOpen.getDay() === 0 ||
+    nextOpen.getDay() === 6 ||
+    isUSHoliday(nextOpen)
+  ) {
+    nextOpen.setDate(nextOpen.getDate() + 1);
+  }
+
+  return nextOpen;
+}
+
+function isUSHoliday(now: Date): boolean {
+  const year = now.getFullYear();
+  const month = now.getMonth();
+  const date = now.getDate();
+
+  // U.S. holidays including Good Friday
+  const holidays = getUSHolidays(year);
+
+  // Check if today is a holiday
+  const isHoliday = holidays.some(
+    (holiday) => holiday.getMonth() === month && holiday.getDate() === date
+  );
+
+  return isHoliday;
+}
+
+// TODO: make return format object of hours and mins and format the string in component
+function formatTimeDiff(milliseconds: number): string {
+  const hours = Math.floor(milliseconds / (1000 * 60 * 60));
+  const minutes = Math.floor((milliseconds % (1000 * 60 * 60)) / (1000 * 60));
+  return `${hours}hrs ${minutes}mins`;
 }
