@@ -5,7 +5,6 @@ import { StockPicker } from "../../components/StockPicker";
 import { StockInfo } from "../../components/StockInfo";
 import UserBalance from "../../components/UserBalance";
 import { MarketStatusComponent } from "../../components/MarketStatus";
-import { Link } from "expo-router";
 
 const App = () => {
   const [ticker, setTicker] = useState<string | null>(null);

@@ -41,7 +41,7 @@ export const StockInfo: React.FC<Props> = ({
         </Text>
       )}
       <Button
-        disabled={loading}
+        disabled={loading || !ticker}
         title={loading ? "Loading..." : quotePrice ? "Refresh" : "Get quote"}
         onPress={handleFetchPrice}
       />

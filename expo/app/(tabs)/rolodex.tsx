@@ -5,9 +5,9 @@ const Profile: React.FC = () => {
   return (
     <View style={styles.container}>
       <View style={[styles.componentContainer]}>
-        <Text>American psyco business card</Text>
-        <Text>Collections</Text>
-        <Text>Acheivements</Text>
+        <Text>Contacts/associates</Text>
+        <Text>Search for new contacts and add as associates</Text>
+        <Text>Invite associates to app</Text>
       </View>
     </View>
   );

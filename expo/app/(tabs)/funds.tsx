@@ -5,9 +5,7 @@ const Profile: React.FC = () => {
   return (
     <View style={styles.container}>
       <View style={[styles.componentContainer]}>
-        <Text>American psyco business card</Text>
-        <Text>Collections</Text>
-        <Text>Acheivements</Text>
+        <Text>Todo</Text>
       </View>
     </View>
   );

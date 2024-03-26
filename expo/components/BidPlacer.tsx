@@ -131,9 +131,7 @@ export const BidPlacer: React.FC<Props> = ({
         onPress={handleAddPick}
       />
       <Button
-        disabled={
-          !ticker || !latestPick || loadingSellPick || latestPick.isSold
-        }
+        disabled={!latestPick || loadingSellPick || latestPick.isSold}
         title={loadingSellPick ? "Selling..." : "Sell"}
         onPress={handleSell}
       />
