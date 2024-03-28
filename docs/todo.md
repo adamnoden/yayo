@@ -1,9 +1,8 @@
 ## Todo next
 
+- start fund datamodel
 - update deps
 - auth
-- user profile route based on user id
-- navigation setup
 
 ## Todo
 
@@ -17,7 +16,7 @@
 
 ## Todo later
 
-- stock lookup api
+- stock lookup api or just hardcode top 1000 of each
 
 ## Todo much later
 
