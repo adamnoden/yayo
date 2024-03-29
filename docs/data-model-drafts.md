@@ -74,11 +74,12 @@ Tracks all strategic investment allocations across the platform.
 
 - **Capital Allocation Document** (`capitalAllocationID`)
   - `uid`: String (The `uid` of the user who made the allocation)
-  - `fundID`: Reference to Fund Document
-  - `stockSymbol`: String
-  - `investedAmount`: Number
-  - `result`: String ("Pending", "Win", "Lose")
-  - `week`: Timestamp (For identifying competition weeks)
+  - `stockSymbol`: String (The symbol of the stock being invested in)
+  - `shares`: Number (The number of shares purchased)
+  - `buyPrice`: Number (The price per share at the time of purchase)
+  - `buyTimestamp`: Timestamp (For identifying competition weeks)
+  - `sellPrice`: Number? (The price per share at the time of sale)
+  - `sellTimestamp`: Timestamp? (For identifying competition weeks)
 
 ### `Messages` Collection (Optional for Direct Messaging)
 
