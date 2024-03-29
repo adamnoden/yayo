@@ -32,11 +32,41 @@ Details of each investment fund, including members and fund-specific activities.
   - `adminUid`: String (The `uid` of the fund's admin)
   - `memberUids`: Array of Strings (Each string is a `uid` of a fund member)
   - `banner`: String (URL)
+  - `performanceStats`: Object
+    - `totalGainsLosses`: Number (Overall profit or loss the fund has generated)
+    - `weeklyPerformance`: Object
+      - `currentWeekGainLoss`: Number
+      - `previousWeekGainLoss`: Number
+    - `winLossRatio`: Object
+      - `wins`: Number
+      - `losses`: Number
+    - `bestPerformance`: Object
+      - `bestWeekGain`: Number
+      - `date`: Timestamp
+    - `worstPerformance`: Object
+      - `worstWeekLoss`: Number
+      - `date`: Timestamp
+    - `averageWeeklyReturn`: Number
+    - `mostProfitableInvestments`: Array of Objects
+      - `stockSymbol`: String
+      - `investedAmount`: Number
+      - `return`: Number
+  - `memberLeaderboard`: Array of Objects
+    - `uid`: String (The `uid` of the member)
+    - `totalGainsLosses`: Number (Member’s overall performance)
+    - `weeklyGainLoss`: Number (Derived from the most recent "CapitalAllocation" document)
   - `capitalAllocations`: Subcollection (Weekly strategic investment allocations by fund members)
     - **Capital Allocation Document** (`capitalAllocationID`)
       - `stockSymbol`: String
       - `investedAmount`: Number
       - `result`: String ("Pending", "Win", "Lose")
+  - `transactions`: Subcollection (Tracks financial activities specific to the fund)
+    - **Transaction Document** (`transactionID`)
+      - `uid`: String (The `uid` of the user involved in the transaction)
+      - `type`: String ("Dividend", "Investment", "Purchase", "Penalty", "Withdrawal")
+      - `amount`: Number
+      - `date`: Timestamp
+      - `details`: String
 
 ### `CapitalAllocations` Global Collection
 
