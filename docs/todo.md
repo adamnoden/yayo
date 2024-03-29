@@ -16,6 +16,8 @@
 
 ## Todo later
 
+- fonts
+- design
 - stock lookup api or just hardcode top 1000 of each
 
 ## Todo much later
