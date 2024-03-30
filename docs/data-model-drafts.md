@@ -6,7 +6,8 @@ Stores individual user profiles, including financial and social details.
 
 - **User Document** (`uid`)
   - `username`: String
-  - `email`: String
+  - `email`: String?
+  - `number`: String?
   - `balance`: Number (Virtual currency balance)
   - `membershipLevel`: String ("Standard", "Executive", "Sovereign")
   - `friendUids`: Array of Strings (Each string is a `uid` of a friend)
