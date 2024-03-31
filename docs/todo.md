@@ -2,7 +2,7 @@
 
 - start fund datamodel
 - update deps
-- auth
+- auth - email
 
 ## Todo
 
@@ -13,9 +13,11 @@
 - wireframe the app, outline screens and navigation
 - error handling
 - think about username strat. usernames/tags
+- cash incentives for things like verifying email address
 
 ## Todo later
 
+- allow annonymous user account and prompt to become email account
 - fonts
 - design
 - stock lookup api or just hardcode top 1000 of each
