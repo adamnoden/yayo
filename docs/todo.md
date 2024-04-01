@@ -1,5 +1,9 @@
 ## Todo next
 
+- username?
+- resend verification email
+- reset password
+- hookup user id to auth
 - start fund datamodel
 - update deps
 - auth - email

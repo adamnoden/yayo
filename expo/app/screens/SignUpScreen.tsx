@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import { View, TextInput, Button, StyleSheet, Alert } from "react-native";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  sendEmailVerification,
+} from "firebase/auth";
 
 export const SignUpScreen = () => {
   const [email, setEmail] = useState("");
@@ -12,13 +16,35 @@ export const SignUpScreen = () => {
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
-        // You can navigate to another screen here or perform additional setup
-        Alert.alert("Sign Up Successful", `Welcome, ${user.email}`);
+
+        sendEmailVerification(user)
+          .then(() => {
+            console.log("send verification success");
+          })
+          .catch((error) => {
+            // Handle errors from sendEmailVerification
+            console.error("Verification email send error:", error);
+          });
+
+        Alert.alert(
+          "Sign Up Successful - we've sent you a verification email",
+          `Welcome, ${user.email}`
+        );
+        // Navigate to main app screen or dashboard
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        Alert.alert("Sign Up Failed", errorMessage);
+        let userFriendlyMessage = "Sign up failed. Please try again.";
+        switch (error.code) {
+          case "auth/email-already-in-use":
+            userFriendlyMessage = "This email is already in use.";
+            break;
+          case "auth/weak-password":
+            userFriendlyMessage =
+              "Password is too weak. Please use minimum of 6 characters";
+            break;
+          // Add more cases as needed
+        }
+        Alert.alert("Sign Up Failed", userFriendlyMessage);
       });
   };
 

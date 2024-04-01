@@ -2,18 +2,17 @@ import { Stack } from "expo-router/stack";
 import { AuthProvider, useAuth } from "./context/AuthContext";
 import { LoginScreen } from "./screens/LoginScreen";
 import { SignUpScreen } from "./screens/SignUpScreen";
-import { useEffect, useState } from "react";
-import { User, getAuth, onAuthStateChanged } from "firebase/auth";
+import { View, StyleSheet } from "react-native";
 
 const AppLayoutInner = () => {
   const { user } = useAuth();
 
   if (!user) {
     return (
-      <>
+      <View style={styles.container}>
+        <SignUpScreen />
         <LoginScreen />
-        {/* <SignUpScreen /> */}
-      </>
+      </View>
     );
   }
 
@@ -30,3 +29,15 @@ export default function AppLayout() {
     </AuthProvider>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    // TODO: fix this styling
+    flex: 1,
+    // justifyContent: "center",
+    // alignItems: "center",
+    justifyContent: "space-evenly",
+    backgroundColor: "white",
+    width: "100%",
+  },
+});

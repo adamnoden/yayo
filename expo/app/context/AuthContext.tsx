@@ -2,6 +2,7 @@ import {
   getAuth,
   onAuthStateChanged,
   signOut as firebaseSignOut,
+  User,
 } from "firebase/auth";
 
 import React, {
@@ -13,8 +14,8 @@ import React, {
 } from "react";
 
 interface AuthContextType {
-  user: object | null;
-  signIn: (user: object) => void;
+  user: User | null;
+  signIn: (user: User) => void;
   signOut: () => void;
   loading: boolean;
 }
@@ -23,7 +24,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [loading, setLoading] = useState(true);
-  const [user, setUser] = useState<object | null>(null);
+  const [user, setUser] = useState<User | null>(null);
 
   // see if was already signed in
   useEffect(() => {
@@ -38,7 +39,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     return () => unsubscribe();
   }, []);
 
-  const signIn = (user: object) => setUser(user);
+  const signIn = (user: User) => setUser(user);
 
   const signOut = () => {
     const auth = getAuth();
