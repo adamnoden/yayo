@@ -7,7 +7,7 @@ import {
   getLatestUserPick,
   sellStockPick,
 } from "../../services/stock-service";
-import { MOCK_USER_ID } from "../../constants";
+import { useAuth } from "../context/AuthContext";
 
 interface Props {
   ticker: string | null;
@@ -19,6 +19,8 @@ export const BidPlacer: React.FC<Props> = ({
   quotePrice,
   onTradeEvent,
 }) => {
+  const { user } = useAuth();
+
   const [latestPick, setLatestPick] = useState<Pick | undefined>();
   const [latestPickId, setLatestPickId] = useState<string | undefined>();
 
@@ -35,7 +37,7 @@ export const BidPlacer: React.FC<Props> = ({
     const fetchLatestPick = async () => {
       setLoadingFetchPick(true);
       try {
-        const response = await getLatestUserPick(MOCK_USER_ID);
+        const response = await getLatestUserPick(user!.uid);
         setLatestPick(response.latestPick);
         setLatestPickId(response.pickId);
       } catch (error) {
@@ -81,8 +83,8 @@ export const BidPlacer: React.FC<Props> = ({
     const shares = 100 / quotePrice;
 
     try {
-      await addStockPick(MOCK_USER_ID, ticker, shares, quotePrice);
-      const response = await getLatestUserPick(MOCK_USER_ID);
+      await addStockPick(user!.uid, ticker, shares, quotePrice);
+      const response = await getLatestUserPick(user!.uid);
       setLatestPick(response.latestPick);
       setLatestPickId(response.pickId);
     } catch (error) {
@@ -100,9 +102,9 @@ export const BidPlacer: React.FC<Props> = ({
     }
     setLoadingSellPick(true);
     try {
-      await sellStockPick(latestPickId, MOCK_USER_ID, currentStockPrice);
+      await sellStockPick(latestPickId, user!.uid, currentStockPrice);
 
-      const response = await getLatestUserPick(MOCK_USER_ID);
+      const response = await getLatestUserPick(user!.uid);
       setLatestPick(response.latestPick);
       setLatestPickId(response.pickId);
     } catch (error) {

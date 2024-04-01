@@ -9,6 +9,7 @@ import {
 export const SignUpScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
   const auth = getAuth();
 
   const handleSignUp = () => {

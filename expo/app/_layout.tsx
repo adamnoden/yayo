@@ -2,10 +2,18 @@ import { Stack } from "expo-router/stack";
 import { AuthProvider, useAuth } from "./context/AuthContext";
 import { LoginScreen } from "./screens/LoginScreen";
 import { SignUpScreen } from "./screens/SignUpScreen";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Text } from "react-native";
 
 const AppLayoutInner = () => {
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
+
+  if (!user && loading) {
+    return (
+      <View style={styles.container}>
+        <Text>Loading user details...</Text>
+      </View>
+    );
+  }
 
   if (!user) {
     return (
@@ -39,5 +47,10 @@ const styles = StyleSheet.create({
     justifyContent: "space-evenly",
     backgroundColor: "white",
     width: "100%",
+  },
+  loading: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });

@@ -1,15 +1,18 @@
 ## Todo next
 
-- username?
-- resend verification email
-- reset password
-- hookup user id to auth
+- initialise user stuff on sign up like account balance and username
+- security rules around users can only edit their own data
+- username uniqueness check
+
 - start fund datamodel
 - update deps
-- auth - email
+- functions auth guard
+- update firestore security settings
 
 ## Todo
 
+- resend verification email option
+- reset password option
 - public user profile, or a single profile that adaps on current user
 - caching some stuff locally like last pick and user balance
 - sort out apple developer stuff

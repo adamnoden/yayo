@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, Button, StyleSheet, Alert } from "react-native";
-import { MOCK_USER_ID } from "../../constants";
 import { fetchUserAccountBalance } from "../../services/user-service";
+import { useAuth } from "../context/AuthContext";
 
 interface Props {
   tradeEventNonce: number;
@@ -9,11 +9,12 @@ interface Props {
 const UserBalance: React.FC<Props> = ({ tradeEventNonce }) => {
   const [balance, setBalance] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const { user } = useAuth();
 
   const getBalance = async () => {
     setLoading(true);
     try {
-      const response = await fetchUserAccountBalance(MOCK_USER_ID);
+      const response = await fetchUserAccountBalance(user!.uid);
       setBalance(response.balance.toFixed(2));
     } catch (error) {
       Alert.alert("Error", "Failed to fetch account balance");
