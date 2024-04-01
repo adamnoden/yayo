@@ -6,8 +6,8 @@ import {
   callFetchStockPrice,
   getLatestUserPick,
   sellStockPick,
-} from "../services/stock-service";
-import { MOCK_USER_ID } from "../constants";
+} from "../../services/stock-service";
+import { MOCK_USER_ID } from "../../constants";
 
 interface Props {
   ticker: string | null;

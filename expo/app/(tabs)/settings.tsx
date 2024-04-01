@@ -1,5 +1,6 @@
 import React from "react";
 import { View, StyleSheet, Text } from "react-native";
+import { LogoutButton } from "../components/LogoutButton";
 
 const Settings: React.FC = () => {
   return (
@@ -11,6 +12,7 @@ const Settings: React.FC = () => {
         <Text>Logout</Text>
         <Text>User stats</Text>
         <Text>Legal disclaimers</Text>
+        <LogoutButton />
       </View>
     </View>
   );

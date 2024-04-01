@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet } from "react-native";
-import { getMarketStatus, MarketStatus } from "../utils";
+import { getMarketStatus, MarketStatus } from "../../utils";
 
 export function MarketStatusComponent() {
   const [marketStatus, setMarketStatus] = useState<MarketStatus | null>(null);

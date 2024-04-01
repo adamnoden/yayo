@@ -1,4 +1,9 @@
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import {
+  getAuth,
+  onAuthStateChanged,
+  signOut as firebaseSignOut,
+} from "firebase/auth";
+
 import React, {
   createContext,
   useContext,
@@ -25,6 +30,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const auth = getAuth();
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setUser(user);
+      console.log("persisted user:", user);
       setLoading(false); // Set loading to false once we receive the auth state
     });
 
@@ -33,7 +39,18 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   const signIn = (user: object) => setUser(user);
-  const signOut = () => setUser(null);
+
+  const signOut = () => {
+    const auth = getAuth();
+    firebaseSignOut(auth)
+      .then(() => {
+        console.log("Sign out succesful");
+        setUser(null);
+      })
+      .catch((error) => {
+        console.error("Sign out error:", error);
+      });
+  };
 
   return (
     <AuthContext.Provider value={{ user, signIn, signOut, loading }}>

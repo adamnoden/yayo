@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { View, StyleSheet } from "react-native";
-import { BidPlacer } from "../../components/BidPlacer";
-import { StockPicker } from "../../components/StockPicker";
-import { StockInfo } from "../../components/StockInfo";
-import UserBalance from "../../components/UserBalance";
-import { MarketStatusComponent } from "../../components/MarketStatus";
+import { BidPlacer } from "../components/BidPlacer";
+import { StockPicker } from "../components/StockPicker";
+import { StockInfo } from "../components/StockInfo";
+import UserBalance from "../components/UserBalance";
+import { MarketStatusComponent } from "../components/MarketStatus";
 
 const App = () => {
   const [ticker, setTicker] = useState<string | null>(null);

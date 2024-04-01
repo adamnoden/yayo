@@ -19,7 +19,7 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="funds"
+        name="Funds"
         options={{
           title: "Funds",
           tabBarIcon: ({ color }) => (
@@ -28,7 +28,7 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="bank"
+        name="Bank"
         options={{
           title: "Bank",
           tabBarIcon: ({ color }) => (
@@ -37,16 +37,16 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="profile"
+        name="Profile"
         options={{
-          title: "Penthouse",
+          title: "Profile",
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="palm-tree" size={24} color={color} />
           ),
         }}
       />
       <Tabs.Screen
-        name="rolodex"
+        name="Rolodex"
         options={{
           title: "Rolodex",
           tabBarIcon: ({ color }) => (
@@ -55,7 +55,7 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="settings"
+        name="Settings"
         options={{
           title: "Settings",
           tabBarIcon: ({ color }) => (

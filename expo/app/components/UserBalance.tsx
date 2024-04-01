@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, Button, StyleSheet, Alert } from "react-native";
-import { MOCK_USER_ID } from "../constants";
-import { fetchUserAccountBalance } from "../services/user-service";
+import { MOCK_USER_ID } from "../../constants";
+import { fetchUserAccountBalance } from "../../services/user-service";
 
 interface Props {
   tradeEventNonce: number;

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, Button } from "react-native";
-import { callFetchStockPrice } from "../services/stock-service";
+import { callFetchStockPrice } from "../../services/stock-service";
 
 interface Props {
   ticker: string | null;
