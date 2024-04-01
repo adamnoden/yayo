@@ -11,6 +11,7 @@
 
 ## Todo
 
+- Use Firestore's real-time listeners to update the balance in your app's UI efficiently.
 - resend verification email option
 - reset password option
 - public user profile, or a single profile that adaps on current user

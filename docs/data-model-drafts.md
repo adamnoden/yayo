@@ -10,7 +10,6 @@ Stores individual user profiles, including financial and social details.
   - `number`: String?
   - `balance`: Number (Virtual currency balance)
   - `membershipLevel`: String ("Standard", "Executive", "Sovereign")
-  - `friendUids`: Array of Strings (Each string is a `uid` of a friend)
   - `purchases`: Subcollection
     - **Purchase Document** (`purchaseID`)
       - `itemType`: String ("Watch", "Yacht", etc.)
@@ -22,6 +21,17 @@ Stores individual user profiles, including financial and social details.
       - `title`: String
       - `dateAchieved`: Timestamp
       - `details`: String
+
+## `Friends`s Collection (`user_friends`)
+
+Each document in this collection represents a friendship link between two users.
+
+- **Friendship Document** (`friendshipID`)
+  - `userUid`: String (UID of the user)
+  - `friendUid`: String (UID of the friend)
+  - `status`: String ("pending", "accepted", "blocked")
+  - `created`: Timestamp (When the friendship was initiated)
+  - `accepted`: Timestamp? (When the friendship was accepted, if applicable)
 
 ### `Funds` Collection
 
