@@ -3,6 +3,7 @@ import { AuthProvider, useAuth } from "./context/AuthContext";
 import { LoginScreen } from "./screens/LoginScreen";
 import { SignUpScreen } from "./screens/SignUpScreen";
 import { View, StyleSheet, Text } from "react-native";
+import { UserDataProvider } from "./context/UserDataContext";
 
 const AppLayoutInner = () => {
   const { user, loading } = useAuth();
@@ -25,9 +26,11 @@ const AppLayoutInner = () => {
   }
 
   return (
-    <Stack>
-      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-    </Stack>
+    <UserDataProvider>
+      <Stack>
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+      </Stack>
+    </UserDataProvider>
   );
 };
 export default function AppLayout() {

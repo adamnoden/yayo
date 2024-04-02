@@ -1,39 +1,43 @@
-import React, { useEffect, useState } from "react";
-import { View, Text, Button, StyleSheet, Alert } from "react-native";
-import { fetchUserAccountBalance } from "../../services/user-service";
-import { useAuth } from "../context/AuthContext";
+import React from "react";
+import {
+  View,
+  Text,
+  Button,
+  StyleSheet,
+  ActivityIndicator,
+} from "react-native";
 
-interface Props {
-  tradeEventNonce: number;
-}
-const UserBalance: React.FC<Props> = ({ tradeEventNonce }) => {
-  const [balance, setBalance] = useState<string | null>(null);
-  const [loading, setLoading] = useState(false);
-  const { user } = useAuth();
+import { useUserData } from "../context/UserDataContext";
 
-  const getBalance = async () => {
-    setLoading(true);
-    try {
-      const response = await fetchUserAccountBalance(user!.uid);
-      setBalance(response.balance.toFixed(2));
-    } catch (error) {
-      Alert.alert("Error", "Failed to fetch account balance");
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
-  };
+const UserBalance: React.FC = () => {
+  const { balance, loading, refreshUserData, error } = useUserData();
 
-  useEffect(() => {
-    getBalance();
-  }, [tradeEventNonce]);
+  if (loading) {
+    return (
+      <View style={styles.centered}>
+        <ActivityIndicator />
+      </View>
+    );
+  }
+
+  if (error) {
+    return (
+      <View style={styles.centered}>
+        <Text>Error: {error.message}</Text>
+      </View>
+    );
+  }
 
   return (
     <View style={styles.container}>
       <Text style={styles.balanceText}>
         {loading ? "Loading..." : `Balance: $${balance}`}
       </Text>
-      <Button title="Refresh Balance" onPress={getBalance} disabled={loading} />
+      <Button
+        title="Refresh Balance"
+        onPress={refreshUserData}
+        disabled={loading}
+      />
     </View>
   );
 };
@@ -47,6 +51,12 @@ const styles = StyleSheet.create({
   balanceText: {
     // fontSize: 20,
     // marginBottom: 20,
+  },
+
+  centered: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
 

@@ -1,7 +1,7 @@
 import React from "react";
 import { View, StyleSheet, Text } from "react-native";
 
-const Profile: React.FC = () => {
+const Rolodex: React.FC = () => {
   return (
     <View style={styles.container}>
       <View style={[styles.componentContainer]}>
@@ -26,4 +26,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Profile;
+export default Rolodex;

@@ -12,13 +12,8 @@ import { useAuth } from "../context/AuthContext";
 interface Props {
   ticker: string | null;
   quotePrice: number | null;
-  onTradeEvent: () => void;
 }
-export const BidPlacer: React.FC<Props> = ({
-  ticker,
-  quotePrice,
-  onTradeEvent,
-}) => {
+export const BidPlacer: React.FC<Props> = ({ ticker, quotePrice }) => {
   const { user } = useAuth();
 
   const [latestPick, setLatestPick] = useState<Pick | undefined>();
@@ -91,7 +86,6 @@ export const BidPlacer: React.FC<Props> = ({
       console.error("Failed to add stock pick:", error);
     } finally {
       setLoadingAddPick(false);
-      onTradeEvent();
     }
   };
 
@@ -111,7 +105,6 @@ export const BidPlacer: React.FC<Props> = ({
       console.error(error);
     } finally {
       setLoadingSellPick(false);
-      onTradeEvent();
     }
   };
 
