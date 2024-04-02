@@ -8,3 +8,4 @@ export { sellStockPick } from "./functions/sellStockPick";
 export { getLatestUserPick } from "./functions/getLatestUserPick";
 export { getUserAccountBalance } from "./functions/getUserAccountBalance";
 export { healthcheck } from "./functions/healthcheck";
+export { createUserDocument } from "./functions/createUser";
