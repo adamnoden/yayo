@@ -1,8 +1,7 @@
 ## Todo next
 
-- initialise user stuff on sign up like account balance and username
-- security rules around users can only edit their own data
-- username uniqueness check
+- guard the stock quote service with auth
+- post sign up username creation
 
 - start fund datamodel
 - update deps
