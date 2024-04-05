@@ -2,6 +2,8 @@
 
 - fund creation
 
+- capital allocation mutation
+
 - guard the stock quote service with auth
 - post sign up username creation
 
