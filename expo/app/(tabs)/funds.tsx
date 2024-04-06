@@ -18,6 +18,7 @@ const Funds: React.FC = () => {
     funds: adminFunds,
     loading: loadingAdminFunds,
     error: errorAdminFunds,
+    refetch,
   } = useAdminFunds();
   const {
     funds: memberFunds,
@@ -49,6 +50,7 @@ const Funds: React.FC = () => {
         `Fund created with ID: ${(result.data as any).fundId}`
       );
       setFundName(""); // Clear the input field after successful fund creation
+      refetch();
     } catch (error) {
       console.error(error);
       Alert.alert("Error", (error as any).message || "Could not create fund.");
@@ -89,7 +91,7 @@ const Funds: React.FC = () => {
             <Text>{errorAdminFunds ? errorAdminFunds.message : ""}</Text>
             {adminFunds?.length ? (
               adminFunds.map((fund: any) => (
-                <Text key={fund.id}>{fund.name}</Text>
+                <Text key={fund.id}> - {fund.name}</Text>
               ))
             ) : (
               <Text>No funds found as Admin.</Text>

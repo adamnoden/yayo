@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import {
   getFirestore,
   collection,
@@ -14,39 +14,34 @@ export const useAdminFunds = () => {
   const [error, setError] = useState<Error | null>(null);
   const { user } = useAuth();
 
-  useEffect(() => {
+  const fetchFunds = useCallback(async () => {
     if (!user) {
-      setLoading(false); // Possibly handle this scenario differently
+      setLoading(false);
       return;
     }
-
+    setLoading(true);
     const db = getFirestore();
-    const fetchFunds = async () => {
-      console.log("fetching admin funds for", user.uid);
-
-      try {
-        const q = query(
-          collection(db, "funds"),
-          where("adminUid", "==", user.uid)
-        );
-
-        const querySnapshot = await getDocs(q);
-
-        const fetchedFunds = querySnapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-
-        setFunds(fetchedFunds);
-      } catch (err) {
-        setError(err instanceof Error ? err : new Error("An error occurred"));
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchFunds();
+    try {
+      const q = query(
+        collection(db, "funds"),
+        where("adminUid", "==", user.uid)
+      );
+      const querySnapshot = await getDocs(q);
+      const fetchedFunds = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setFunds(fetchedFunds);
+    } catch (error) {
+      setError(error instanceof Error ? error : new Error("An error occurred"));
+    } finally {
+      setLoading(false);
+    }
   }, [user]);
 
-  return { funds, loading, error };
+  useEffect(() => {
+    fetchFunds();
+  }, [fetchFunds]);
+
+  return { funds, loading, error, refetch: fetchFunds };
 };
