@@ -31,7 +31,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const auth = getAuth();
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setUser(user);
-      console.log("persisted user:", user);
+      // console.log("persisted user:", user);
       setLoading(false); // Set loading to false once we receive the auth state
     });
 

@@ -22,17 +22,21 @@ export const useAdminFunds = () => {
 
     const db = getFirestore();
     const fetchFunds = async () => {
+      console.log("fetching admin funds for", user.uid);
+
       try {
         const q = query(
           collection(db, "funds"),
           where("adminUid", "==", user.uid)
         );
+
         const querySnapshot = await getDocs(q);
 
         const fetchedFunds = querySnapshot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),
         }));
+
         setFunds(fetchedFunds);
       } catch (err) {
         setError(err instanceof Error ? err : new Error("An error occurred"));

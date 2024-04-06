@@ -86,6 +86,7 @@ const Funds: React.FC = () => {
         ) : (
           <>
             <Text style={styles.header}>Admin Funds</Text>
+            <Text>{errorAdminFunds ? errorAdminFunds.message : ""}</Text>
             {adminFunds?.length ? (
               adminFunds.map((fund: any) => (
                 <Text key={fund.id}>{fund.name}</Text>
@@ -95,6 +96,8 @@ const Funds: React.FC = () => {
             )}
 
             <Text style={styles.header}>Member Funds</Text>
+
+            <Text>{errorMemberFunds ? errorMemberFunds.message : ""}</Text>
             {memberFunds?.length ? (
               memberFunds.map((fund: any) => (
                 <Text key={fund.id}>{fund.name}</Text>

@@ -29,11 +29,15 @@ export const useMemberFunds = () => {
         );
         const querySnapshot = await getDocs(q);
 
-        const fetchedFunds = querySnapshot.docs.map((doc) => ({
+        const fetchedFunds: any[] = querySnapshot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),
         }));
-        setFunds(fetchedFunds);
+
+        const filteredFunds = fetchedFunds.filter(
+          (fund) => fund.adminUid !== user.uid
+        );
+        setFunds(filteredFunds);
       } catch (err) {
         setError(err instanceof Error ? err : new Error("An error occurred"));
       } finally {
