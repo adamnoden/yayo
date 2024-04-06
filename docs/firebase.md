@@ -15,3 +15,6 @@ firebase firestore:indexes > firestore.indexes.json
 
 // can also deploy indexes if edits made locally
 firebase deploy --only firestore:indexes
+
+// update local firestore security rules
+firebase deploy --only firestore:rules
