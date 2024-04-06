@@ -274,8 +274,8 @@ Catalogue of achievements that users can unlock.
 ## General technical info:
 
 - I am using firestore and expo.
-- Both of these are already set up and I already have a number of deployed functions that i am consuming for example.
-- I'm using typescript.
+- Both of these are already set up and I already have a number of deployed functions that i am consuming alredy. don't worry about initialisation
+- I'm using typescript and react.
 - i have a hook to get the user (firebase User object): `const { user } = useAuth();`
 - i think im using Firebase v9+ modular SDK
 

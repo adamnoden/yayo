@@ -17,7 +17,7 @@ const App = () => {
         <MarketStatusComponent />
       </View>
       <View style={[styles.componentContainer, styles.greenBorder]}>
-        <UserBalance />
+        {/* <UserBalance /> */}
       </View>
       <View style={[styles.componentContainer]}>
         <StockPicker onChange={(t) => setTicker(t)} />
@@ -31,7 +31,7 @@ const App = () => {
       </View>
 
       <View style={[styles.componentContainer, styles.greenBorder]}>
-        <BidPlacer ticker={ticker} quotePrice={quotePrice} />
+        {/* <BidPlacer ticker={ticker} quotePrice={quotePrice} /> */}
       </View>
     </View>
   );
