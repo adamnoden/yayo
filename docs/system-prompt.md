@@ -1,4 +1,4 @@
-I am creating an iOS game. I am using firestore and expo. Below is an outline of the app. None of the overview below is final - just a concept overview for context. There may be many inconsistencies and some of the features I've already decided to abandon but the remenants of my thoughts still remain below
+I am creating an iOS game. I am using firestore and expo. Both of these are already set up and I already have a number of deployed functions that i am consuming for example. I'm using typescript. Below is an outline of the app. None of the overview below is final - just a concept overview for context. There may be many inconsistencies and some of the features I've already decided to abandon but the remenants of my thoughts still remain below
 
 # App outline
 
@@ -188,7 +188,7 @@ Details of each investment fund, including members and fund-specific activities.
 
 - **Fund Document** (`fundID`)
   - `name`: String
-  - `description`: String
+  - `fundLevel`: number
   - `adminUid`: String (The `uid` of the fund's admin)
   - `memberUids`: Array of Strings (Each string is a `uid` of a fund member)
   - `banner`: String (URL)
@@ -270,3 +270,7 @@ Catalogue of achievements that users can unlock.
   - `title`: String
   - `description`: String
   - `icon`: String (URL)
+
+## Conclusion
+
+You don't need to summarise any of this. Just say understood if you understand, and if not ask me questions. When you are ready to begin I will ask you questions. This is not the first time i have given you this prompt and not the last. If in the course of out discussion you think it would be useful to update any of this please let me know.
