@@ -1,4 +1,4 @@
-I am creating an iOS game. I am using firestore and expo. Both of these are already set up and I already have a number of deployed functions that i am consuming for example. I'm using typescript. Below is an outline of the app. None of the overview below is final - just a concept overview for context. There may be many inconsistencies and some of the features I've already decided to abandon but the remenants of my thoughts still remain below
+I am creating an iOS game. Below is an outline of the app. None of the overview below is final - just a concept overview for context. There may be many inconsistencies and some of the features I've already decided to abandon but the remenants of my thoughts still remain below
 
 # App outline
 
@@ -270,6 +270,14 @@ Catalogue of achievements that users can unlock.
   - `title`: String
   - `description`: String
   - `icon`: String (URL)
+
+## General technical info:
+
+- I am using firestore and expo.
+- Both of these are already set up and I already have a number of deployed functions that i am consuming for example.
+- I'm using typescript.
+- i have a hook to get the user (firebase User object): `const { user } = useAuth();`
+- i think im using Firebase v9+ modular SDK
 
 ## Conclusion
 
