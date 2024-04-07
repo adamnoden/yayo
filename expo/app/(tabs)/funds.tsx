@@ -75,6 +75,7 @@ const Funds: React.FC = () => {
           placeholder="Enter fund name (5-16 chars)"
           value={fundName}
           onChangeText={onChangeText}
+          editable={!loadingCreate}
         />
         <Button
           title={loadingCreate ? "Creating..." : "Create New Fund"}

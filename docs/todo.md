@@ -1,7 +1,6 @@
 ## Todo next
 
-- fund creation
-
+- click on fund to view details - fund screen
 - capital allocation mutation
 
 - guard the stock quote service with auth

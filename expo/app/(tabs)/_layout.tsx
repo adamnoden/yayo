@@ -14,7 +14,11 @@ export default function TabLayout() {
         options={{
           title: "Dashboard",
           tabBarIcon: ({ color }) => (
-            <FontAwesome6 size={28} name="money-bill-transfer" color={color} />
+            <MaterialCommunityIcons
+              name="monitor-dashboard"
+              size={28}
+              color={color}
+            />
           ),
         }}
       />

@@ -3,8 +3,7 @@ import { View, Text, ActivityIndicator, StyleSheet } from "react-native";
 import { useUserData } from "../context/UserDataContext";
 
 const Profile = () => {
-  const { balance, email, username, membershipLevel, loading, error } =
-    useUserData();
+  const { email, username, loading, error } = useUserData();
 
   if (loading) {
     return (
@@ -28,8 +27,6 @@ const Profile = () => {
       <View>
         <Text>Email: {email}</Text>
         <Text>Username: {username}</Text>
-        <Text>Membership Level: {membershipLevel}</Text>
-        <Text>Balance: ${balance}</Text>
       </View>
     </View>
   );
