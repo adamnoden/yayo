@@ -1,0 +1,60 @@
+import React, { createContext, useContext, ReactNode } from "react";
+import { useAdminFunds } from "../hooks/useAdminFunds";
+import { useMemberFunds } from "../hooks/useMemberFunds";
+
+interface FundContextType {
+  adminFunds: any[] | null;
+  loadingAdminFunds: boolean;
+  errorAdminFunds: Error | null;
+  refetchAdminFunds: () => Promise<void>;
+  memberFunds: any[] | null;
+  loadingMemberFunds: boolean;
+  errorMemberFunds: Error | null;
+  allFunds: any[];
+}
+
+const FundContext = createContext<FundContextType | undefined>(undefined);
+
+interface Props {
+  children: ReactNode;
+}
+export const FundProvider: React.FC<Props> = ({ children }) => {
+  const {
+    funds: adminFunds,
+    loading: loadingAdminFunds,
+    error: errorAdminFunds,
+    refetch: refetchAdminFunds,
+  } = useAdminFunds();
+  const {
+    funds: memberFunds,
+    loading: loadingMemberFunds,
+    error: errorMemberFunds,
+  } = useMemberFunds();
+
+  const allFunds = [...(adminFunds || []), ...(memberFunds || [])];
+
+  return (
+    <FundContext.Provider
+      value={{
+        adminFunds,
+        loadingAdminFunds,
+        errorAdminFunds,
+        refetchAdminFunds,
+        memberFunds,
+        loadingMemberFunds,
+        errorMemberFunds,
+        allFunds,
+      }}
+    >
+      {children}
+    </FundContext.Provider>
+  );
+};
+
+export const useFunds = () => {
+  const context = useContext(FundContext);
+  if (context === undefined) {
+    throw new Error("useFunds must be used within a FundContext");
+  }
+  return context;
+};

@@ -13,6 +13,7 @@
 
 ## Todo
 
+- types for funds
 - Use Firestore's real-time listeners to update the balance in your app's UI efficiently.
 - resend verification email option
 - reset password option

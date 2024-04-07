@@ -8,11 +8,15 @@ import {
   ActivityIndicator,
   Alert,
   TextInput,
+  Pressable,
 } from "react-native";
 import { getFunctions, httpsCallable } from "firebase/functions";
 import { useFunds } from "../context/FundContext";
 
-export const FundsOverview: React.FC = () => {
+interface Props {
+  handleFundSelect: (fundId: string) => void;
+}
+export const FundsOverview: React.FC<Props> = ({ handleFundSelect }) => {
   const {
     adminFunds,
     loadingAdminFunds,
@@ -26,7 +30,7 @@ export const FundsOverview: React.FC = () => {
   const [loadingCreate, setLoadingCreate] = useState(false);
 
   const createFund = useCallback(async () => {
-    // special chars?
+    // TODO: remove any special chars?
     if (!fundName || fundName.length < 5 || fundName.length > 16) {
       Alert.alert(
         "Validation Error",
@@ -60,10 +64,6 @@ export const FundsOverview: React.FC = () => {
     setFundName(name);
   };
 
-  if (loadingAdminFunds || loadingMemberFunds) {
-    return <ActivityIndicator style={styles.loader} />;
-  }
-
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.componentContainer}>
@@ -90,7 +90,13 @@ export const FundsOverview: React.FC = () => {
             <Text>{errorAdminFunds ? errorAdminFunds.message : ""}</Text>
             {adminFunds?.length ? (
               adminFunds.map((fund: any) => (
-                <Text key={fund.id}> - {fund.name}</Text>
+                <Pressable
+                  key={fund.id}
+                  style={styles.button}
+                  onPress={() => handleFundSelect(fund.id)}
+                >
+                  <Text style={styles.buttonText}>{fund.name}</Text>
+                </Pressable>
               ))
             ) : (
               <Text>No funds found as Admin.</Text>
@@ -101,7 +107,13 @@ export const FundsOverview: React.FC = () => {
             <Text>{errorMemberFunds ? errorMemberFunds.message : ""}</Text>
             {memberFunds?.length ? (
               memberFunds.map((fund: any) => (
-                <Text key={fund.id}>{fund.name}</Text>
+                <Pressable
+                  key={fund.id}
+                  style={styles.button}
+                  onPress={() => handleFundSelect(fund.id)}
+                >
+                  <Text style={styles.buttonText}>{fund.name}</Text>
+                </Pressable>
               ))
             ) : (
               <Text>No funds found as Member.</Text>
@@ -122,6 +134,19 @@ const styles = StyleSheet.create({
   },
   componentContainer: {
     width: "90%",
+  },
+  button: {
+    marginVertical: 5,
+    padding: 10,
+    borderWidth: 1,
+    borderColor: "#007BFF",
+    borderRadius: 5,
+    backgroundColor: "white",
+    alignItems: "center",
+  },
+  buttonText: {
+    color: "#007BFF",
+    fontSize: 16,
   },
   header: {
     fontSize: 18,
