@@ -10,25 +10,18 @@ import {
   TextInput,
 } from "react-native";
 import { getFunctions, httpsCallable } from "firebase/functions";
+import { useFunds } from "../context/FundContext";
 
-interface Props {
-  adminFunds: object[] | null;
-  loadingAdminFunds: boolean;
-  errorAdminFunds: Error | null;
-  refetchAdminFunds: () => Promise<void>;
-  memberFunds: object[] | null;
-  loadingMemberFunds: boolean;
-  errorMemberFunds: Error | null;
-}
-export const FundsOverview: React.FC<Props> = ({
-  adminFunds,
-  loadingAdminFunds,
-  errorAdminFunds,
-  refetchAdminFunds,
-  memberFunds,
-  loadingMemberFunds,
-  errorMemberFunds,
-}) => {
+export const FundsOverview: React.FC = () => {
+  const {
+    adminFunds,
+    loadingAdminFunds,
+    errorAdminFunds,
+    refetchAdminFunds,
+    memberFunds,
+    loadingMemberFunds,
+    errorMemberFunds,
+  } = useFunds();
   const [fundName, setFundName] = useState("");
   const [loadingCreate, setLoadingCreate] = useState(false);
 
@@ -80,6 +73,7 @@ export const FundsOverview: React.FC<Props> = ({
           value={fundName}
           onChangeText={onChangeText}
           editable={!loadingCreate}
+          spellCheck={false}
         />
         <Button
           title={loadingCreate ? "Creating..." : "Create New Fund"}

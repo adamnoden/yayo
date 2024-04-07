@@ -4,6 +4,7 @@ import { LoginScreen } from "./screens/LoginScreen";
 import { SignUpScreen } from "./screens/SignUpScreen";
 import { View, StyleSheet, Text } from "react-native";
 import { UserDataProvider } from "./context/UserDataContext";
+import { FundProvider } from "./context/FundContext";
 
 const AppLayoutInner = () => {
   const { user, loading } = useAuth();
@@ -27,9 +28,11 @@ const AppLayoutInner = () => {
 
   return (
     <UserDataProvider>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-      </Stack>
+      <FundProvider>
+        <Stack>
+          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        </Stack>
+      </FundProvider>
     </UserDataProvider>
   );
 };
