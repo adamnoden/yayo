@@ -1,18 +1,18 @@
 ## Todo next
 
-- click on fund to view details - fund screen
-- capital allocation mutation
+- capital allocation
+- invites to funds
+- friend system?
 
-- guard the stock quote service with auth
 - post sign up username creation
 
-- start fund datamodel
 - update deps
-- functions auth guard
-- update firestore security settings
 
 ## Todo
 
+- dashboard summary of all funds stuff. net worth and such. weekly personal performance. pending things like to allocate
+
+- guard the stock quote service with auth
 - types for funds
 - Use Firestore's real-time listeners to update the balance in your app's UI efficiently.
 - resend verification email option
