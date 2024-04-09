@@ -3,8 +3,7 @@ import { View, StyleSheet, Text, ActivityIndicator } from "react-native";
 import { useUserData } from "../context/UserDataContext";
 
 const Bank: React.FC = () => {
-  const { balance, email, username, membershipLevel, loading, error } =
-    useUserData();
+  const { balance, membershipLevel, loading, error } = useUserData();
 
   if (loading) {
     return (
