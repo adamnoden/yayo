@@ -1,6 +1,20 @@
 ## Todo next
 
 - capital allocation
+
+  - search a ticker -> generate quote
+  - execute and buy allocated amount
+  - lock into fund model
+  - refresh fund? subscribe to changes?
+  - see the holdings in the fund details page
+  - do this for two separate funds
+  - dashboard aggregation of gains/losses
+
+- think about the autosell aspect per week
+  - when to autosell
+  - update fund stats
+  - how to display last weeks stuff
+  - notifications?
 - invites to funds
 - friend system?
 
