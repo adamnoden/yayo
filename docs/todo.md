@@ -20,8 +20,6 @@
 
 - post sign up username creation
 
-- update deps
-
 ## Todo
 
 - dashboard summary of all funds stuff. net worth and such. weekly personal performance. pending things like to allocate
