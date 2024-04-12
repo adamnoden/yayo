@@ -273,7 +273,8 @@ Catalogue of achievements that users can unlock.
 
 ## General technical info:
 
-- I am using firestore and expo.
+- I am using Firebase for my backend including Firestore, Cloud Functions and auth
+- I am using Expo with React Native along with expo-router. Expo v50, react v18
 - Both of these are already set up and I already have a number of deployed functions that i am consuming alredy. don't worry about initialisation
 - I'm using typescript and react.
 - i have a hook to get the user (firebase User object): `const { user } = useAuth();`
