@@ -1,5 +1,8 @@
 ## Todo next
 
+- check the data structure of the fund to see if an allocation has been made
+
+- root level types folder
 - capital allocation
 
   - search a ticker -> generate quote
