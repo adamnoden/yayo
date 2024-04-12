@@ -6,10 +6,11 @@ import {
   where,
   getDocs,
 } from "firebase/firestore";
-import { useAuth } from "../context/AuthContext"; // Assuming the same AuthContext usage
+import { useAuth } from "../context/AuthContext";
+import { Fund } from "../../../types";
 
 export const useMemberFunds = () => {
-  const [funds, setFunds] = useState<object[] | null>(null);
+  const [funds, setFunds] = useState<Fund[] | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
   const { user } = useAuth();
@@ -29,9 +30,9 @@ export const useMemberFunds = () => {
         );
         const querySnapshot = await getDocs(q);
 
-        const fetchedFunds: any[] = querySnapshot.docs.map((doc) => ({
+        const fetchedFunds = querySnapshot.docs.map((doc) => ({
           id: doc.id,
-          ...doc.data(),
+          ...(doc.data() as Fund),
         }));
 
         const filteredFunds = fetchedFunds.filter(

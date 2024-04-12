@@ -8,13 +8,14 @@ import React, {
 } from "react";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
+import { UserData as RawUserData } from "../../../types";
 
 // Define a TypeScript interface for the context value for better type safety (if using TypeScript)
 interface UserData {
   balance: number;
   loading: boolean;
   error: Error | null;
-  email: string | null;
+  email?: string;
   username: string | null;
   membershipLevel: string | null;
   refreshUserData: () => Promise<void>;
@@ -27,7 +28,7 @@ const defaultData = {
   balance: 0,
   loading: true,
   error: null,
-  email: null,
+  email: undefined,
   username: null,
   membershipLevel: null,
 };
@@ -54,7 +55,7 @@ export const UserDataProvider: React.FC<UserDataProviderProps> = ({
       try {
         const docSnap = await getDoc(userDocRef);
         if (docSnap.exists()) {
-          const data = docSnap.data();
+          const data = docSnap.data() as RawUserData;
           setUserData({
             balance: data.balance ? data.balance / 100 : 0,
             loading: false,

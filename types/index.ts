@@ -9,15 +9,14 @@ export enum MembershipLevel {
 }
 
 // Users.ts
-export interface User {
-  uid: string;
+export interface UserData {
   username: string;
-  email?: string;
-  number?: string;
   balance: number;
   membershipLevel: MembershipLevel;
-  purchases: Purchase[];
-  achievements: Achievement[];
+  email?: string;
+  number?: string;
+  purchases?: Purchase[];
+  achievements?: Achievement[];
 }
 
 export interface Purchase {
@@ -35,7 +34,6 @@ export interface Achievement {
   details: string;
 }
 
-// Friends.ts
 export interface Friendship {
   friendshipID: string;
   userUid: string;
@@ -45,18 +43,17 @@ export interface Friendship {
   accepted?: Date;
 }
 
-// Funds.ts
 export interface Fund {
-  fundID: string;
   name: string;
-  fundLevel: number;
+  level: number;
   adminUid: string;
   memberUids: string[];
-  banner: string;
-  performanceStats: FundPerformanceStats;
-  memberLeaderboard: MemberLeaderboardEntry[];
-  capitalAllocations: CapitalAllocation[];
-  transactions: Transaction[];
+  // banner: string;
+  createdAt: any; // stored as `FirebaseFirestore.Timestamp` - on front end convert to `Date` with `toDate()`
+  performanceStats?: FundPerformanceStats;
+  memberLeaderboard?: MemberLeaderboardEntry[]; // not sure if final structure
+  capitalAllocations?: CapitalAllocation[]; // not sure if final structure - rethink
+  transactions?: Transaction[];
 }
 
 export interface FundPerformanceStats {
@@ -96,11 +93,11 @@ export interface MemberLeaderboardEntry {
   weeklyGainLoss: number;
 }
 
+// TODO: think about this structure
 export interface CapitalAllocation {
   capitalAllocationID: string;
   stockSymbol: string;
-  investedAmount: number;
-  result: "Pending" | "Win" | "Lose";
+  sharesBought: number;
 }
 
 export interface Transaction {
@@ -112,7 +109,6 @@ export interface Transaction {
   details: string;
 }
 
-// CapitalAllocations.ts
 export interface CapitalAllocationDocument {
   capitalAllocationID: string;
   uid: string;

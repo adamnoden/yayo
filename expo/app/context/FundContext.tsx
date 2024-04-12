@@ -1,16 +1,17 @@
 import React, { createContext, useContext, ReactNode } from "react";
 import { useAdminFunds } from "../hooks/useAdminFunds";
 import { useMemberFunds } from "../hooks/useMemberFunds";
+import { Fund } from "../../../types";
 
 interface FundContextType {
-  adminFunds: any[] | null;
+  adminFunds: Fund[] | null;
   loadingAdminFunds: boolean;
   errorAdminFunds: Error | null;
   refetchAdminFunds: () => Promise<void>;
-  memberFunds: any[] | null;
+  memberFunds: Fund[] | null;
   loadingMemberFunds: boolean;
   errorMemberFunds: Error | null;
-  allFunds: any[];
+  allFunds: Fund[];
 }
 
 const FundContext = createContext<FundContextType | undefined>(undefined);

@@ -1,23 +1,6 @@
 import * as functions from "firebase-functions";
 import * as admin from "firebase-admin";
-
-interface FundData {
-  name: string;
-  adminUid: string;
-  createdAt: FirebaseFirestore.FieldValue;
-  performanceStats: {
-    totalGainsLosses: number;
-    weeklyPerformance: object;
-    winLossRatio: { wins: number; losses: number };
-    bestPerformance: object;
-    worstPerformance: object;
-    averageWeeklyReturn: number;
-    mostProfitableInvestments: any[];
-  };
-  memberLeaderboard: any[];
-  memberUids: string[];
-  level: number;
-}
+import { Fund } from "../../../../types";
 
 export const createFund = functions.https.onCall(
   async (data: { name: string }, context) => {
@@ -48,27 +31,17 @@ export const createFund = functions.https.onCall(
 
     const adminUid = context.auth.uid;
 
-    const fundData: FundData = {
+    const fundData: Fund = {
       name,
       adminUid,
-      memberUids: [adminUid], // Initialize with the creator as the first member
+      memberUids: [adminUid],
       createdAt: admin.firestore.FieldValue.serverTimestamp(),
-      performanceStats: {
-        totalGainsLosses: 0,
-        weeklyPerformance: {},
-        winLossRatio: { wins: 0, losses: 0 },
-        bestPerformance: {},
-        worstPerformance: {},
-        averageWeeklyReturn: 0,
-        mostProfitableInvestments: [],
-      },
       memberLeaderboard: [],
       level: 1, // Initialize fund level
     };
 
-    // Add the fund to the database
     try {
-      const docRef = await admin.firestore().collection("funds").add(fundData); // Note the lowercase 'funds'
+      const docRef = await admin.firestore().collection("funds").add(fundData);
       console.log("Fund created with ID: ", docRef.id);
       return { fundId: docRef.id };
     } catch (error) {

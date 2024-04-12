@@ -188,7 +188,7 @@ Details of each investment fund, including members and fund-specific activities.
 
 - **Fund Document** (`fundID`)
   - `name`: String
-  - `fundLevel`: number
+  - `level`: number
   - `adminUid`: String (The `uid` of the fund's admin)
   - `memberUids`: Array of Strings (Each string is a `uid` of a fund member)
   - `banner`: String (URL)

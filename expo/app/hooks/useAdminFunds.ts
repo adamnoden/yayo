@@ -7,9 +7,10 @@ import {
   getDocs,
 } from "firebase/firestore";
 import { useAuth } from "../context/AuthContext";
+import { Fund } from "../../../types";
 
 export const useAdminFunds = () => {
-  const [funds, setFunds] = useState<object[] | null>(null);
+  const [funds, setFunds] = useState<Fund[] | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
   const { user } = useAuth();
@@ -29,7 +30,7 @@ export const useAdminFunds = () => {
       const querySnapshot = await getDocs(q);
       const fetchedFunds = querySnapshot.docs.map((doc) => ({
         id: doc.id,
-        ...doc.data(),
+        ...(doc.data() as Fund),
       }));
       setFunds(fetchedFunds);
     } catch (error) {
