@@ -1,3 +1,7 @@
+/**
+ * NOTE and TODO: everything below is totally fucked thres something incredibly wrong going wrong like no accounting for the fact that someone would not be in ET
+ */
+
 enum MarketClosureReason {
   Holiday = "Holiday",
   Weekend = "Weekend",
@@ -36,7 +40,7 @@ export function getMarketStatus(): MarketStatus {
   }
 
   // Check for market hours, adjusting for user's local timezone to ET
-  if (!isWithinMarketHours()) {
+  if (!isWithinMarketHours(now)) {
     return {
       isOpen: false,
       reason: MarketClosureReason.OutOfMarketHours,
@@ -68,8 +72,7 @@ function getUSHolidays(year: number): Date[] {
 }
 
 // Function to check if the current time is within market hours
-function isWithinMarketHours(): boolean {
-  const now = new Date();
+function isWithinMarketHours(now: Date): boolean {
   const utcHour = now.getUTCHours();
 
   // Determine if current date is within DST for the U.S. (Eastern Time)
@@ -183,7 +186,7 @@ function calculateTimeUntilNextOpenOrClose(now: Date, isOpen: boolean): string {
   }
 
   // Calculate the difference in milliseconds
-  const diff = targetTime.getTime() - now.getTime();
+  const diff = Math.abs(targetTime.getTime() - now.getTime());
 
   // Convert milliseconds to a more human-readable form (e.g., hours, minutes)
   return formatTimeDiff(diff);
@@ -228,7 +231,17 @@ function isUSHoliday(now: Date): boolean {
 
 // TODO: make return format object of hours and mins and format the string in component
 function formatTimeDiff(milliseconds: number): string {
-  const hours = Math.floor(milliseconds / (1000 * 60 * 60));
-  const minutes = Math.floor((milliseconds % (1000 * 60 * 60)) / (1000 * 60));
-  return `${hours}hrs ${minutes}mins`;
+  // Convert milliseconds to total seconds
+  const totalSeconds = Math.floor(milliseconds / 1000);
+
+  // Extract hours
+  const hours = Math.floor(totalSeconds / 3600); // 3600 seconds in an hour
+  // Remaining seconds after extracting hours
+  const secondsAfterHours = totalSeconds % 3600;
+
+  // Extract minutes
+  const minutes = Math.floor(secondsAfterHours / 60); // 60 seconds in a minute
+
+  // Return formatted string
+  return `${hours} hours, ${minutes} minutes`;
 }

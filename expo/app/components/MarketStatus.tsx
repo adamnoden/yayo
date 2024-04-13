@@ -26,7 +26,7 @@ export function MarketStatusComponent() {
         Market {marketOpen ? "OPEN" : "CLOSED"}
       </Text>
       <Text>
-        {closeReason && `${closeReason}`}.{" "}
+        {closeReason && `${closeReason}.`}{" "}
         {marketOpen ? "Closed in " : "Open in"}: {nextChange}
       </Text>
     </View>
