@@ -43,7 +43,8 @@ export interface Friendship {
   accepted?: Date;
 }
 
-export interface Fund {
+// backend fund interface
+export interface FundData {
   name: string;
   level: number;
   adminUid: string;
@@ -54,6 +55,12 @@ export interface Fund {
   memberLeaderboard?: MemberLeaderboardEntry[]; // not sure if final structure
   capitalAllocations?: CapitalAllocation[]; // not sure if final structure - rethink
   transactions?: Transaction[];
+}
+
+// frontend fund interface
+export interface Fund extends FundData {
+  id: string;
+  createdAt: Date;
 }
 
 export interface FundPerformanceStats {

@@ -7,7 +7,7 @@ import {
   getDocs,
 } from "firebase/firestore";
 import { useAuth } from "../context/AuthContext";
-import { Fund } from "../../../types";
+import { Fund, FundData } from "../../../types";
 
 export const useMemberFunds = () => {
   const [funds, setFunds] = useState<Fund[] | null>(null);
@@ -30,10 +30,14 @@ export const useMemberFunds = () => {
         );
         const querySnapshot = await getDocs(q);
 
-        const fetchedFunds = querySnapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...(doc.data() as Fund),
-        }));
+        const fetchedFunds = querySnapshot.docs.map((doc) => {
+          const rawData = doc.data() as FundData;
+          return {
+            ...rawData,
+            id: doc.id,
+            createdAt: rawData.createdAt.toDate(),
+          };
+        });
 
         const filteredFunds = fetchedFunds.filter(
           (fund) => fund.adminUid !== user.uid

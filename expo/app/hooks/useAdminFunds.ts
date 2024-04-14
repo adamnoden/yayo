@@ -7,7 +7,7 @@ import {
   getDocs,
 } from "firebase/firestore";
 import { useAuth } from "../context/AuthContext";
-import { Fund } from "../../../types";
+import { Fund, FundData } from "../../../types";
 
 export const useAdminFunds = () => {
   const [funds, setFunds] = useState<Fund[] | null>(null);
@@ -28,10 +28,14 @@ export const useAdminFunds = () => {
         where("adminUid", "==", user.uid)
       );
       const querySnapshot = await getDocs(q);
-      const fetchedFunds = querySnapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...(doc.data() as Fund),
-      }));
+      const fetchedFunds = querySnapshot.docs.map((doc) => {
+        const rawData = doc.data() as FundData;
+        return {
+          ...rawData,
+          id: doc.id,
+          createdAt: rawData.createdAt.toDate(),
+        };
+      });
       setFunds(fetchedFunds);
     } catch (error) {
       setError(error instanceof Error ? error : new Error("An error occurred"));
