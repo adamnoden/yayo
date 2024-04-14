@@ -13,12 +13,13 @@ export const FundDetails: React.FC<Props> = ({ fundId, returnToOverView }) => {
   if (!selectedFund) {
     return (
       <View style={styles.container}>
-        <Text>Fund not found.</Text>
+        <Text>Fund not found. This is.. unexpected</Text>
         <Button title="Go Back" onPress={returnToOverView} />
       </View>
     );
   }
 
+  console.log(selectedFund);
   return (
     <View style={styles.container}>
       <Text style={styles.title}>{selectedFund.name}</Text>
