@@ -215,11 +215,12 @@ Details of each investment fund, including members and fund-specific activities.
     - `uid`: String (The `uid` of the member)
     - `totalGainsLosses`: Number (Member’s overall performance)
     - `weeklyGainLoss`: Number (Derived from the most recent "CapitalAllocation" document)
-  - `capitalAllocations`: Subcollection (Weekly strategic investment allocations by fund members)
-    - **Capital Allocation Document** (`capitalAllocationID`)
-      - `stockSymbol`: String
-      - `investedAmount`: Number
-      - `result`: String ("Pending", "Win", "Lose")
+  - `capitalAllocations`: Nested docs (Weekly strategic investment allocations by fund members)
+    - `uid`: String (The `uid` of the user who made the allocation)
+    - `stockSymbol`: String (The symbol of the stock being invested in)
+    - `shares`: Number (The number of shares purchased)
+    - `buyPrice`: Number (The price per share at the time of purchase)
+    - `buyTimestamp`: Timestamp (For identifying competition weeks)
   - `transactions`: Subcollection (Tracks financial activities specific to the fund)
     - **Transaction Document** (`transactionID`)
       - `uid`: String (The `uid` of the user involved in the transaction)
@@ -230,16 +231,17 @@ Details of each investment fund, including members and fund-specific activities.
 
 ### `CapitalAllocations` Global Collection
 
-Tracks all strategic investment allocations across the platform.
+Tracks all strategic investment allocations across the platform. These are archived documents after being purged on a weekly basis from being nested in the fund colletion itself.
 
 - **Capital Allocation Document** (`capitalAllocationID`)
   - `uid`: String (The `uid` of the user who made the allocation)
+  - `fundID`: String (the id of the Fund that this was a part of)
   - `stockSymbol`: String (The symbol of the stock being invested in)
   - `shares`: Number (The number of shares purchased)
   - `buyPrice`: Number (The price per share at the time of purchase)
   - `buyTimestamp`: Timestamp (For identifying competition weeks)
   - `sellPrice`: Number? (The price per share at the time of sale)
-  - `sellTimestamp`: Timestamp? (For identifying competition weeks)
+  - `weekEnding`: Timestamp? (For identifying competition weeks)
 
 ### `Messages` Collection (Optional for Direct Messaging)
 
