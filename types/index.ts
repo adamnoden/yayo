@@ -49,12 +49,12 @@ export interface FundData {
   level: number;
   adminUid: string;
   memberUids: string[];
-  // banner: string;
+  capitalAllocations: LiveCapitalAllocation[];
   createdAt: any; // stored as `FirebaseFirestore.Timestamp` - on front end convert to `Date` with `toDate()`
-  performanceStats?: FundPerformanceStats;
-  memberLeaderboard?: MemberLeaderboardEntry[]; // not sure if final structure
-  capitalAllocations?: CapitalAllocation[]; // not sure if final structure - rethink
-  transactions?: Transaction[];
+  // performanceStats?: FundPerformanceStats;
+  // memberLeaderboard?: MemberLeaderboardEntry[]; // not sure if final structure
+
+  // transactions?: Transaction[];
 }
 
 // frontend fund interface
@@ -100,13 +100,6 @@ export interface MemberLeaderboardEntry {
   weeklyGainLoss: number;
 }
 
-// TODO: think about this structure
-export interface CapitalAllocation {
-  capitalAllocationID: string;
-  stockSymbol: string;
-  sharesBought: number;
-}
-
 export interface Transaction {
   transactionID: string;
   uid: string;
@@ -116,15 +109,28 @@ export interface Transaction {
   details: string;
 }
 
-export interface CapitalAllocationDocument {
+// active in the current week
+export interface LiveCapitalAllocation {
+  stockSymbol: string;
+  sharesBought: number;
+  uid: String; // user who allocated
+  buyPrice: number;
+  buyTimestamp: Date;
+}
+
+// archived capital allocation
+export interface ArchivedCapitalAllocation {
   capitalAllocationID: string;
+  fundID: string;
   uid: string;
   stockSymbol: string;
   shares: number;
   buyPrice: number;
   buyTimestamp: Date;
-  sellPrice?: number;
-  sellTimestamp?: Date;
+  sellPrice: number;
+  sellTimestamp: Date;
+  weekEnding: Date;
+  weekStarting: Date;
 }
 
 // Messages.ts

@@ -215,12 +215,12 @@ Details of each investment fund, including members and fund-specific activities.
     - `uid`: String (The `uid` of the member)
     - `totalGainsLosses`: Number (Member’s overall performance)
     - `weeklyGainLoss`: Number (Derived from the most recent "CapitalAllocation" document)
-  - `capitalAllocations`: Nested docs (Weekly strategic investment allocations by fund members)
+  - `capitalAllocations`: Array of Objects (Weekly strategic investment allocations by fund members)
     - `uid`: String (The `uid` of the user who made the allocation)
     - `stockSymbol`: String (The symbol of the stock being invested in)
     - `shares`: Number (The number of shares purchased)
     - `buyPrice`: Number (The price per share at the time of purchase)
-    - `buyTimestamp`: Timestamp (For identifying competition weeks)
+    - `buyTimestamp`: Timestamp
   - `transactions`: Subcollection (Tracks financial activities specific to the fund)
     - **Transaction Document** (`transactionID`)
       - `uid`: String (The `uid` of the user involved in the transaction)
@@ -240,8 +240,9 @@ Tracks all strategic investment allocations across the platform. These are archi
   - `shares`: Number (The number of shares purchased)
   - `buyPrice`: Number (The price per share at the time of purchase)
   - `buyTimestamp`: Timestamp (For identifying competition weeks)
-  - `sellPrice`: Number? (The price per share at the time of sale)
-  - `weekEnding`: Timestamp? (For identifying competition weeks)
+  - `sellPrice`: Number (The price per share at the time of sale)
+  - `weekEnding`: Timestamp (For identifying competition weeks)
+  - `weekStarting`: Timestamp (For identifying competition weeks)
 
 ### `Messages` Collection (Optional for Direct Messaging)
 

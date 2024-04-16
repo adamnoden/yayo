@@ -36,8 +36,8 @@ export const createFund = functions.https.onCall(
       adminUid,
       memberUids: [adminUid],
       createdAt: admin.firestore.FieldValue.serverTimestamp(),
-      memberLeaderboard: [],
       level: 1, // Initialize fund level
+      capitalAllocations: [],
     };
 
     try {
