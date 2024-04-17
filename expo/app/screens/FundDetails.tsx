@@ -24,6 +24,22 @@ export const FundDetails: React.FC<Props> = ({ fundId, returnToOverView }) => {
     <View style={styles.container}>
       <Text style={styles.title}>{selectedFund.name}</Text>
 
+      {selectedFund.capitalAllocations.length > 0 ? (
+        <View style={styles.allocations}>
+          {selectedFund.capitalAllocations.map((x) => {
+            return (
+              <Text>
+                {x.uid.slice(0, 4)} - {x.stockSymbol} - {x.buyPrice}
+              </Text>
+            );
+          })}
+        </View>
+      ) : (
+        <View>
+          <Text>Nobody has allocated</Text>
+        </View>
+      )}
+
       <Button title="Go Back" onPress={returnToOverView} />
     </View>
   );
@@ -40,6 +56,10 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
     marginBottom: 10,
+  },
+  allocations: {
+    borderColor: "#aaa",
+    borderWidth: 1,
   },
   // Add more styles as needed
 });

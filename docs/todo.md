@@ -4,6 +4,7 @@
 
 ## Todo next
 
+- maybe usernames should be fetched when the fund is fetched. maybe usernames should be stored in the fund? hmm
 - check the data structure of the fund to see if an allocation has been made
 
 - capital allocation
