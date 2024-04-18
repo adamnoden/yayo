@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text, Button, StyleSheet } from "react-native";
 import { useFunds } from "../context/FundContext";
+import { useUserData } from "../context/UserDataContext";
 
 interface Props {
   fundId: string;
@@ -9,6 +10,7 @@ interface Props {
 export const FundDetails: React.FC<Props> = ({ fundId, returnToOverView }) => {
   const { allFunds } = useFunds();
   const selectedFund = allFunds.find((fund) => fund.id === fundId);
+  const { uid } = useUserData();
 
   if (!selectedFund) {
     return (
@@ -19,13 +21,19 @@ export const FundDetails: React.FC<Props> = ({ fundId, returnToOverView }) => {
     );
   }
 
+  const userAllocation = selectedFund.capitalAllocations.find(
+    (x) => x.uid === uid
+  );
+
   console.log(selectedFund);
   return (
     <View style={styles.container}>
       <Text style={styles.title}>{selectedFund.name}</Text>
 
+      {!userAllocation ?? <View>{/* add user alocation input here */}</View>}
       {selectedFund.capitalAllocations.length > 0 ? (
         <View style={styles.allocations}>
+          {/* TODO: sort with user alloc at top */}
           {selectedFund.capitalAllocations.map((x) => {
             return (
               <Text>

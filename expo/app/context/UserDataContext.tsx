@@ -19,6 +19,7 @@ interface UserData {
   username: string | null;
   membershipLevel: string | null;
   refreshUserData: () => Promise<void>;
+  uid: string;
 }
 
 const UserDataContext = createContext<UserData | undefined>(undefined);
@@ -31,6 +32,7 @@ const defaultData = {
   email: undefined,
   username: null,
   membershipLevel: null,
+  uid: "",
 };
 
 interface UserDataProviderProps {
@@ -63,6 +65,7 @@ export const UserDataProvider: React.FC<UserDataProviderProps> = ({
             email: data.email,
             username: data.username,
             membershipLevel: data.membershipLevel,
+            uid: user.uid,
           });
         } else {
           setUserData({
