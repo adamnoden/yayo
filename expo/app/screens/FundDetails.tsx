@@ -2,6 +2,7 @@ import React from "react";
 import { View, Text, Button, StyleSheet } from "react-native";
 import { useFunds } from "../context/FundContext";
 import { useUserData } from "../context/UserDataContext";
+import { CapitalAllocationForm } from "../components/CapitalAllocationForm";
 
 interface Props {
   fundId: string;
@@ -30,7 +31,12 @@ export const FundDetails: React.FC<Props> = ({ fundId, returnToOverView }) => {
     <View style={styles.container}>
       <Text style={styles.title}>{selectedFund.name}</Text>
 
-      {!userAllocation ?? <View>{/* add user alocation input here */}</View>}
+      {!userAllocation ?? (
+        <View style={styles.allocationForm}>
+          <CapitalAllocationForm />
+        </View>
+      )}
+
       {selectedFund.capitalAllocations.length > 0 ? (
         <View style={styles.allocations}>
           {/* TODO: sort with user alloc at top */}
@@ -68,6 +74,11 @@ const styles = StyleSheet.create({
   allocations: {
     borderColor: "#aaa",
     borderWidth: 1,
+  },
+  allocationForm: {
+    borderColor: "green",
+    borderWidth: 1,
+    marginBottom: 20,
   },
   // Add more styles as needed
 });
