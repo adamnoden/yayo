@@ -1,12 +1,18 @@
 import React, { useState } from "react";
-import { View, StyleSheet } from "react-native";
-import { STOCK_LIST } from "../../constants/stock-list";
+import { View, StyleSheet, Button } from "react-native";
 import { StockPicker } from "./StockPicker";
 import { StockInfo } from "./StockInfo";
 
-export const CapitalAllocationForm: React.FC = () => {
+interface Props {
+  fundLevel: number;
+}
+export const CapitalAllocationForm: React.FC<Props> = ({ fundLevel }) => {
   const [ticker, setTicker] = useState<string | null>(null);
   const [quotePrice, setQuotePrice] = useState<number | null>(null);
+
+  const handleAlloc = () => {
+    console.log("todo");
+  };
 
   return (
     <View style={styles.container}>
@@ -16,6 +22,7 @@ export const CapitalAllocationForm: React.FC = () => {
         quotePrice={quotePrice}
         setQuotePrice={setQuotePrice}
       />
+      <Button onPress={handleAlloc} title="Allocate Funds" />
     </View>
   );
 };
