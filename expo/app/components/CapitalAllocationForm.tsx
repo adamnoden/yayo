@@ -14,6 +14,8 @@ export const CapitalAllocationForm: React.FC<Props> = ({ fundLevel }) => {
     console.log("todo");
   };
 
+  //   TODO: quote price should perhaps expire
+
   return (
     <View style={styles.container}>
       <StockPicker onChange={(t) => setTicker(t)} />
@@ -22,7 +24,12 @@ export const CapitalAllocationForm: React.FC<Props> = ({ fundLevel }) => {
         quotePrice={quotePrice}
         setQuotePrice={setQuotePrice}
       />
-      <Button onPress={handleAlloc} title="Allocate Funds" />
+
+      <Button
+        disabled={!quotePrice}
+        onPress={handleAlloc}
+        title="Allocate Funds"
+      />
     </View>
   );
 };
