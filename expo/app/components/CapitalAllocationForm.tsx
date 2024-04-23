@@ -20,18 +20,31 @@ export const CapitalAllocationForm: React.FC<Props> = ({
 }) => {
   const [ticker, setTicker] = useState<string | null>(null);
   const [quotePrice, setQuotePrice] = useState<number | null>(null);
+  const [quotePriceTime, setQuotePriceTime] = useState<number | null>(null);
 
   const { allocateCapital, loading, error, success } = useAllocateCapital();
 
   const handleAlloc = () => {
-    if (!ticker) {
+    const now = Date.now();
+
+    if (!ticker || !quotePriceTime) {
       console.error("No ticker selected");
       return;
     }
+
+    if (now - quotePriceTime < 5_000 * 60) {
+      console.error("Need to update quote");
+      // TODO: timer for this and show on UI
+      //   return;
+    }
+
     allocateCapital(ticker, fundId);
   };
 
-  //   TODO: quote price should perhaps expire
+  const updateQuotePrice = (price: number | null) => {
+    setQuotePrice(price);
+    setQuotePriceTime(Date.now());
+  };
 
   return (
     <View style={styles.container}>
@@ -39,7 +52,7 @@ export const CapitalAllocationForm: React.FC<Props> = ({
       <StockInfo
         ticker={ticker}
         quotePrice={quotePrice}
-        setQuotePrice={setQuotePrice}
+        setQuotePrice={updateQuotePrice}
       />
 
       {loading && <ActivityIndicator size="small" color="#0000ff" />}
