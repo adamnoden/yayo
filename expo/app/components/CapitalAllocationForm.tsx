@@ -1,17 +1,34 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Button } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Button,
+  ActivityIndicator,
+  Text,
+} from "react-native";
 import { StockPicker } from "./StockPicker";
 import { StockInfo } from "./StockInfo";
+import { useAllocateCapital } from "../hooks/useAllocateCapital";
 
 interface Props {
   fundLevel: number;
+  fundId: string;
 }
-export const CapitalAllocationForm: React.FC<Props> = ({ fundLevel }) => {
+export const CapitalAllocationForm: React.FC<Props> = ({
+  fundLevel,
+  fundId,
+}) => {
   const [ticker, setTicker] = useState<string | null>(null);
   const [quotePrice, setQuotePrice] = useState<number | null>(null);
 
+  const { allocateCapital, loading, error, success } = useAllocateCapital();
+
   const handleAlloc = () => {
-    console.log("todo");
+    if (!ticker) {
+      console.error("No ticker selected");
+      return;
+    }
+    allocateCapital(ticker, fundId);
   };
 
   //   TODO: quote price should perhaps expire
@@ -24,6 +41,10 @@ export const CapitalAllocationForm: React.FC<Props> = ({ fundLevel }) => {
         quotePrice={quotePrice}
         setQuotePrice={setQuotePrice}
       />
+
+      {loading && <ActivityIndicator size="small" color="#0000ff" />}
+      {error && <Text>Error: {error}</Text>}
+      {success && <Text>Allocation Successful!</Text>}
 
       <Button
         disabled={!quotePrice}

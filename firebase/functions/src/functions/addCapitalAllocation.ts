@@ -19,6 +19,10 @@ export const addCapitalAllocation = functions.https.onCall(
     const symbol = data.stockSymbol;
     const fundId = data.fundId;
 
+    // TODO: fetch fund
+    // get fund level
+    // validate user hasn't allocated yet
+
     try {
       // Fetch stock price using the previously defined Cloud Function
       const priceResult = await fetchPrice(symbol);
@@ -28,6 +32,7 @@ export const addCapitalAllocation = functions.https.onCall(
       }
 
       // Calculate shares such that the total investment is as close to $100 as possible without exceeding it
+      // TODO: get from fund level
       const amountToInvest = 100;
       const shares = Math.floor(amountToInvest / price);
 

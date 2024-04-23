@@ -33,7 +33,10 @@ export const FundDetails: React.FC<Props> = ({ fundId, returnToOverView }) => {
 
       {!userAllocation ?? (
         <View style={styles.allocationForm}>
-          <CapitalAllocationForm fundLevel={selectedFund.level} />
+          <CapitalAllocationForm
+            fundLevel={selectedFund.level}
+            fundId={selectedFund.id}
+          />
         </View>
       )}
 
