@@ -4,20 +4,10 @@ import { BidPlacer } from "../components/BidPlacer";
 import { StockPicker } from "../components/StockPicker";
 import { StockInfo } from "../components/StockInfo";
 import { MarketStatusComponent } from "../components/MarketStatus";
+import { FUND_LEVEL_ALLOCATION_MAP } from "../../../types/constants";
 
-interface AllocationMap {
-  [level: number]: number;
-}
+// TODO: this component isnt even used
 
-const FUND_LEVEL_ALLOCATION_MAP: AllocationMap = {
-  1: 100,
-  2: 1_000,
-  3: 10_000,
-  4: 50_000,
-  5: 100_000,
-  6: 250_000,
-  7: 1_000_000,
-};
 interface Props {
   fundLevel: number;
 }

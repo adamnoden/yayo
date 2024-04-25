@@ -43,6 +43,8 @@ export const LoginScreen = () => {
         secureTextEntry
       />
       <Button title="Log In" onPress={handleLogin} />
+
+      {/* TODO: password reset */}
     </View>
   );
 };

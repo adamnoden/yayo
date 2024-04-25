@@ -45,8 +45,9 @@ export const FundDetails: React.FC<Props> = ({ fundId, returnToOverView }) => {
           {/* TODO: sort with user alloc at top */}
           {selectedFund.capitalAllocations.map((x) => {
             return (
-              <Text>
+              <Text style={x.uid === uid ? styles.container : {}}>
                 {x.uid.slice(0, 4)} - {x.stockSymbol} - {x.buyPrice}
+                {/* // TODO: gains/loss here */}
               </Text>
             );
           })}
@@ -77,6 +78,9 @@ const styles = StyleSheet.create({
   allocations: {
     borderColor: "#aaa",
     borderWidth: 1,
+  },
+  userAllocation: {
+    color: "blue",
   },
   allocationForm: {
     borderColor: "green",
