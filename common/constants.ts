@@ -2,6 +2,9 @@ interface AllocationMap {
   [level: number]: number;
 }
 
+/**
+ * Maps a fund level to the allocation limit per member for each week
+ */
 export const FUND_LEVEL_ALLOCATION_MAP: AllocationMap = {
   1: 100,
   2: 1_000,
