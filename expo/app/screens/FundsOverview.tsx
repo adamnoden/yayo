@@ -30,6 +30,7 @@ export const FundsOverview: React.FC<Props> = ({ handleFundSelect }) => {
   const [loadingCreate, setLoadingCreate] = useState(false);
 
   const createFund = useCallback(async () => {
+    // TODO: trim() and other client side cleanup
     // TODO: remove any special chars?
     if (!fundName || fundName.length < 5 || fundName.length > 16) {
       Alert.alert(

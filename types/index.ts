@@ -49,7 +49,7 @@ export interface FundData {
   level: number;
   adminUid: string;
   memberUids: string[];
-  capitalAllocations: LiveCapitalAllocation[];
+  capitalAllocations?: LiveCapitalAllocation[];
   createdAt: any; // stored as `FirebaseFirestore.Timestamp` - on front end convert to `Date` with `toDate()`
   // performanceStats?: FundPerformanceStats;
   // memberLeaderboard?: MemberLeaderboardEntry[]; // not sure if final structure

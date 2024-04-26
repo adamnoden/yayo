@@ -9,6 +9,21 @@ import {
 import { StockPicker } from "./StockPicker";
 import { StockInfo } from "./StockInfo";
 import { useAllocateCapital } from "../hooks/useAllocateCapital";
+import { MarketStatusComponent } from "./MarketStatus";
+
+interface AllocationMap {
+  [level: number]: number;
+}
+
+export const FUND_LEVEL_ALLOCATION_MAP: AllocationMap = {
+  1: 100,
+  2: 1_000,
+  3: 10_000,
+  4: 50_000,
+  5: 100_000,
+  6: 250_000,
+  7: 1_000_000,
+};
 
 interface Props {
   fundLevel: number;
@@ -46,18 +61,30 @@ export const CapitalAllocationForm: React.FC<Props> = ({
     setQuotePriceTime(Date.now());
   };
 
+  const allocationAmount = FUND_LEVEL_ALLOCATION_MAP[fundLevel];
+
   return (
     <View style={styles.container}>
-      <StockPicker onChange={(t) => setTicker(t)} />
-      <StockInfo
-        ticker={ticker}
-        quotePrice={quotePrice}
-        setQuotePrice={updateQuotePrice}
-      />
+      <View style={[styles.componentContainer]}>
+        <MarketStatusComponent />
+      </View>
+      <View style={[styles.componentContainer]}>
+        Your allocation allowance: ${allocationAmount}
+      </View>
+      <View style={[styles.componentContainer]}>
+        <StockPicker onChange={(t) => setTicker(t)} />
+        <StockInfo
+          ticker={ticker}
+          quotePrice={quotePrice}
+          setQuotePrice={updateQuotePrice}
+        />
+      </View>
 
-      {loading && <ActivityIndicator size="small" color="#0000ff" />}
-      {error && <Text>Error: {error}</Text>}
-      {success && <Text>Allocation Successful!</Text>}
+      <View style={[styles.componentContainer]}>
+        {loading && <ActivityIndicator size="small" color="#0000ff" />}
+        {error && <Text>Error: {error}</Text>}
+        {success && <Text>Allocation Successful!</Text>}
+      </View>
 
       <Button
         disabled={!quotePrice}
@@ -74,5 +101,9 @@ const styles = StyleSheet.create({
     // alignItems: "center",
     // justifyContent: "center",
     // paddingTop: 50, // Adjust based on your screen layout
+  },
+  componentContainer: {
+    width: "90%",
+    marginBottom: 20,
   },
 });

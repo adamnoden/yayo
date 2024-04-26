@@ -22,7 +22,7 @@ export const FundDetails: React.FC<Props> = ({ fundId, returnToOverView }) => {
     );
   }
 
-  const userAllocation = selectedFund.capitalAllocations.find(
+  const userAllocation = selectedFund.capitalAllocations?.find(
     (x) => x.uid === uid
   );
 
@@ -40,7 +40,8 @@ export const FundDetails: React.FC<Props> = ({ fundId, returnToOverView }) => {
         </View>
       )}
 
-      {selectedFund.capitalAllocations.length > 0 ? (
+      {selectedFund.capitalAllocations &&
+      selectedFund.capitalAllocations.length > 0 ? (
         <View style={styles.allocations}>
           {/* TODO: sort with user alloc at top */}
           {selectedFund.capitalAllocations.map((x) => {
