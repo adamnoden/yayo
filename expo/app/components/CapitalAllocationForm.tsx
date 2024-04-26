@@ -25,6 +25,8 @@ export const FUND_LEVEL_ALLOCATION_MAP: AllocationMap = {
   7: 1_000_000,
 };
 
+const QUOTE_EXPIRATION_MAX = 5 * 60 * 1000; // 5 mins?
+
 interface Props {
   fundLevel: number;
   fundId: string;
@@ -47,7 +49,13 @@ export const CapitalAllocationForm: React.FC<Props> = ({
       return;
     }
 
-    if (now - quotePriceTime < 5_000 * 60) {
+    const durationSinceLastQuoteMs = now - quotePriceTime;
+
+    console.log("now", now);
+    console.log("quotePriceTime", quotePriceTime);
+    console.log("diff", durationSinceLastQuoteMs, QUOTE_EXPIRATION_MAX);
+
+    if (durationSinceLastQuoteMs < QUOTE_EXPIRATION_MAX) {
       console.error("Need to update quote");
       // TODO: timer for this and show on UI
       //   return;
@@ -69,7 +77,7 @@ export const CapitalAllocationForm: React.FC<Props> = ({
         <MarketStatusComponent />
       </View>
       <View style={[styles.componentContainer]}>
-        Your allocation allowance: ${allocationAmount}
+        <Text>Your allocation allowance: ${allocationAmount}</Text>
       </View>
       <View style={[styles.componentContainer]}>
         <StockPicker onChange={(t) => setTicker(t)} />
@@ -89,7 +97,7 @@ export const CapitalAllocationForm: React.FC<Props> = ({
       <Button
         disabled={!quotePrice}
         onPress={handleAlloc}
-        title="Allocate Funds"
+        title={`Allocate $${allocationAmount}`}
       />
     </View>
   );
