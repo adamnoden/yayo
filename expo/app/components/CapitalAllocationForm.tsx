@@ -55,7 +55,7 @@ export const CapitalAllocationForm: React.FC<Props> = ({
     console.log("quotePriceTime", quotePriceTime);
     console.log("diff", durationSinceLastQuoteMs, QUOTE_EXPIRATION_MAX);
 
-    if (durationSinceLastQuoteMs < QUOTE_EXPIRATION_MAX) {
+    if (durationSinceLastQuoteMs >= QUOTE_EXPIRATION_MAX) {
       console.error("Need to update quote");
       // TODO: timer for this and show on UI
       //   return;

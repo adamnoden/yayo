@@ -22,9 +22,8 @@ export const FundDetails: React.FC<Props> = ({ fundId, returnToOverView }) => {
     );
   }
 
-  const userAllocation = selectedFund.capitalAllocations?.find(
-    (x) => x.uid === uid
-  );
+  const userAllocation =
+    selectedFund.capitalAllocations && selectedFund.capitalAllocations[uid];
 
   console.log(selectedFund);
   return (
@@ -40,14 +39,13 @@ export const FundDetails: React.FC<Props> = ({ fundId, returnToOverView }) => {
         </View>
       )}
 
-      {selectedFund.capitalAllocations &&
-      selectedFund.capitalAllocations.length > 0 ? (
+      {selectedFund.capitalAllocations ? (
         <View style={styles.allocations}>
           {/* TODO: sort with user alloc at top */}
-          {selectedFund.capitalAllocations.map((x) => {
+          {Object.entries(selectedFund.capitalAllocations).map(([k, x]) => {
             return (
-              <Text style={x.uid === uid ? styles.container : {}}>
-                {x.uid.slice(0, 4)} - {x.stockSymbol} - {x.buyPrice}
+              <Text key={k} style={k === uid ? styles.userAllocation : {}}>
+                {k.slice(0, 4)} - {x.stockSymbol} - ${x.buyPrice}
                 {/* // TODO: gains/loss here */}
               </Text>
             );
@@ -81,7 +79,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   userAllocation: {
-    color: "blue",
+    color: "green",
   },
   allocationForm: {
     borderColor: "green",

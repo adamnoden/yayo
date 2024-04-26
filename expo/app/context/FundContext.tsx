@@ -1,7 +1,7 @@
 import React, { createContext, useContext, ReactNode } from "react";
 import { useAdminFunds } from "../hooks/useAdminFunds";
 import { useMemberFunds } from "../hooks/useMemberFunds";
-import { Fund } from "../../../types";
+import { Fund } from "../../../common";
 
 interface FundContextType {
   adminFunds: Fund[] | null;

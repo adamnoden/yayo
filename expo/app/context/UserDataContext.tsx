@@ -8,7 +8,7 @@ import React, {
 } from "react";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
-import { UserData as RawUserData } from "../../../types";
+import { UserData as RawUserData } from "../../../common";
 
 // Define a TypeScript interface for the context value for better type safety (if using TypeScript)
 interface UserData {

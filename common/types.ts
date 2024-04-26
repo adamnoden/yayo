@@ -49,7 +49,9 @@ export interface FundData {
   level: number;
   adminUid: string;
   memberUids: string[];
-  capitalAllocations?: LiveCapitalAllocation[];
+  capitalAllocations?: {
+    [uid: string]: LiveCapitalAllocation;
+  };
   createdAt: any; // stored as `FirebaseFirestore.Timestamp` - on front end convert to `Date` with `toDate()`
   // performanceStats?: FundPerformanceStats;
   // memberLeaderboard?: MemberLeaderboardEntry[]; // not sure if final structure
@@ -113,7 +115,6 @@ export interface Transaction {
 export interface LiveCapitalAllocation {
   stockSymbol: string;
   sharesBought: number;
-  uid: String; // user who allocated
   buyPrice: number;
   buyTimestamp: Date;
 }
