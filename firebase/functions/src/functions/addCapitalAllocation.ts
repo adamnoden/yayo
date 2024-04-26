@@ -19,9 +19,11 @@ export const addCapitalAllocation = functions.https.onCall(
     const symbol = data.stockSymbol;
     const fundId = data.fundId;
 
-    // TODO: fetch fund
-    // get fund level
+    // TODO: get fund from firestore by fundId
+    // verify it exists
+    // verify user is an admin or a member
     // validate user hasn't allocated yet
+    // get fund level
 
     try {
       // Fetch stock price using the previously defined Cloud Function
