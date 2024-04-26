@@ -1,7 +1,7 @@
 ## Todo now
 
-- e2e test on reading and writing allocations
 - subscription to them to update immediately
+- figure out the common folder setup
 
 ## Todo next
 
