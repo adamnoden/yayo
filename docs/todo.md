@@ -1,19 +1,13 @@
 ## Todo now
 
-- subscription to them to update immediately
 - figure out the common folder setup
 
 ## Todo next
 
 - maybe usernames should be fetched when the fund is fetched. maybe usernames should be stored in the fund? hmm
-- check the data structure of the fund to see if an allocation has been made
 
 - capital allocation
 
-  - search a ticker -> generate quote
-  - execute and buy allocated amount
-  - lock into fund model
-  - refresh fund? subscribe to changes?
   - see the holdings in the fund details page
   - do this for two separate funds
   - dashboard aggregation of gains/losses
