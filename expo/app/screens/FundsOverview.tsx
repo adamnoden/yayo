@@ -21,7 +21,7 @@ export const FundsOverview: React.FC<Props> = ({ handleFundSelect }) => {
     adminFunds,
     loadingAdminFunds,
     errorAdminFunds,
-    refetchAdminFunds,
+    // refetchAdminFunds,
     memberFunds,
     loadingMemberFunds,
     errorMemberFunds,
@@ -52,7 +52,7 @@ export const FundsOverview: React.FC<Props> = ({ handleFundSelect }) => {
         `Fund created with ID: ${(result.data as any).fundId}`
       );
       setFundName("");
-      refetchAdminFunds();
+      // refetchAdminFunds();
     } catch (error) {
       console.error(error);
       Alert.alert("Error", (error as any).message || "Could not create fund.");
