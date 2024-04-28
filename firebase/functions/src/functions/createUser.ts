@@ -1,15 +1,15 @@
 import * as functions from "firebase-functions";
 import * as admin from "firebase-admin";
-// import { MembershipLevel, UserData } from "../../../../types";
+import { MembershipLevel, UserData } from "../common";
 
 export const createUserDocument = functions.auth.user().onCreate((user) => {
   const db = admin.firestore();
 
   // Define the user document's default content
-  const defaultUserData: any = {
+  const defaultUserData: UserData = {
     username: "", // will get the user to update this later in the flow
     balance: 1_000_00, // Initial balance of a grand
-    membershipLevel: "Standard", // MembershipLevel.Standard,
+    membershipLevel: MembershipLevel.Standard,
     email: user.email,
   };
 

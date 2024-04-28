@@ -116,7 +116,7 @@ export interface LiveCapitalAllocation {
   stockSymbol: string;
   sharesBought: number;
   buyPrice: number;
-  buyTimestamp: Date;
+  buyTimestamp: any; // TODO:
 }
 
 // archived capital allocation

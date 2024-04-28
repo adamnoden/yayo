@@ -1,6 +1,6 @@
 import * as functions from "firebase-functions";
 import * as admin from "firebase-admin";
-// import { FundData } from "../../../../types";
+import { FundData } from "../common";
 
 export const createFund = functions.https.onCall(
   async (data: { name: string }, context) => {
@@ -31,8 +31,7 @@ export const createFund = functions.https.onCall(
 
     const adminUid = context.auth.uid;
 
-    // TODO: type
-    const fundData: any = {
+    const fundData: FundData = {
       name,
       adminUid,
       memberUids: [adminUid],

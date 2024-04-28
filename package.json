@@ -1,0 +1,9 @@
+{
+  "name": "yayo-monorepo",
+  "dependencies": {
+    "fs-extra": "^11.2.0"
+  },
+  "scripts": {
+    "copy-shared": "node copy-shared.js"
+  }
+}

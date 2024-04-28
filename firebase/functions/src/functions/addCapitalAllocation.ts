@@ -1,6 +1,7 @@
 import * as functions from "firebase-functions";
 import * as admin from "firebase-admin";
 import { fetchPrice } from "./fetchStockPrice";
+import { LiveCapitalAllocation } from "../common";
 
 // TODO: have some specific types folder for function inputs and outputs
 interface AllocationData {
@@ -68,9 +69,9 @@ export const addCapitalAllocation = functions.https.onCall(
     const amountToInvest = 100; // This will be dynamic based on fund level (shared const in common)
     const shares = Math.floor(amountToInvest / price);
 
-    const allocation = {
+    const allocation: LiveCapitalAllocation = {
       stockSymbol: stockSymbol,
-      shares: shares,
+      sharesBought: shares,
       buyPrice: price,
       buyTimestamp: admin.firestore.FieldValue.serverTimestamp(),
     };

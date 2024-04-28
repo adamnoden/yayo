@@ -7,7 +7,7 @@ import {
   getDocs,
 } from "firebase/firestore";
 import { useAuth } from "../context/AuthContext";
-import { Fund, FundData } from "../../../common";
+import { Fund, FundData } from "../../common";
 
 export const useMemberFunds = () => {
   const [funds, setFunds] = useState<Fund[] | null>(null);
