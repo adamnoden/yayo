@@ -1,6 +1,6 @@
 ## Todo now
 
-- figure out the common folder setup
+- post signup usernames flow
 
 ## Todo next
 
