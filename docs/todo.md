@@ -1,6 +1,8 @@
 ## Todo now
 
 - post signup usernames flow
+- allocation performance summary
+- dashboard aggregation of fund performance
 
 ## Todo next
 
