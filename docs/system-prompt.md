@@ -11,6 +11,10 @@ Possible but undecided meanings:
 - Yoshimura Asset Yield Observatory
 - Yamamoto Asset Yield Organisation
 
+## possible domains
+
+- yayo.finance
+
 ## Elevator Pitch
 
 A sort of cross between a hedge fund simulator and trading fantasty league with a poolsuite.fm aeasthetic
