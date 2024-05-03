@@ -8,11 +8,7 @@
 
 - maybe usernames should be fetched when the fund is fetched. maybe usernames should be stored in the fund? hmm
 
-- capital allocation
-
-  - see the holdings in the fund details page
-  - do this for two separate funds
-  - dashboard aggregation of gains/losses
+- autosell: Firebase Cloud Functions and Google Cloud Scheduler
 
 - think about the autosell aspect per week
   - when to autosell
